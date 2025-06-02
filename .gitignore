@@ -3,6 +3,7 @@
 
 ### Build Tools ###
 target/
+.mvn/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
