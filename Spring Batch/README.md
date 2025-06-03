@@ -51,3 +51,6 @@
 ## JobRepository
 * A JobRepository is used to store metadata about a job
 * It stores metadata in a database
+
+## Annotations
+* @EnableBatchProcessing
