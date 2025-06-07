@@ -51,3 +51,37 @@
 ## JobRepository
 * A JobRepository is used to store metadata about a job
 * It stores metadata in a database
+
+## Annotations
+* @EnableBatchProcessing
+
+## Job FLow
+1. Sequential Flow
+2. Conditional Flow
+
+## Status
+1. Batch Status (STATUS)
+2. Exit Status (EXIT_CODE)
+
+### Bacth Status
+* Batch Status represent the overall status of a job or step
+* Specified in enum
+* List of Batch status
+    1. COMPLETED
+    2. STARTING
+    3. STARTED
+    4. STOPPING
+    5. STOPPED
+    6. FAILED
+    7. ABANDONED
+    8. UNKNOWN
+
+### Exit Status
+* Exit Status represent the status of a job or step after it finishes execution
+* We can also create our won Exit Status
+* List of Exit Status
+    1. COMPLETED
+    2. STOPPED
+    3. FAILED
+    4. EXECUTING
+    5. UNKNOWN
