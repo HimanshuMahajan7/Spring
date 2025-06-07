@@ -23,9 +23,29 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Job job1(JobRepository jobRepository, Step step1) {
+    public Step step2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("Step2", jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    System.out.println("Step 2");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager).build();
+    }
+
+    @Bean
+    public Step step3(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("Step3", jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    System.out.println("Step 3");
+                    return RepeatStatus.FINISHED;
+                }, transactionManager).build();
+    }
+
+    @Bean
+    public Job job1(JobRepository jobRepository, Step step1, Step step2, Step step3) {
         return new JobBuilder("Job 1", jobRepository)
                 .start(step1)
+                .next(step2)
+                .next(step3)
                 .build();
     }
 }
