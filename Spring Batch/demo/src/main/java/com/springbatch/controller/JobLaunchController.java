@@ -28,6 +28,10 @@ public class JobLaunchController {
     @Qualifier("conditionalJob")
     Job conditionalJob;
 
+    @Autowired
+    @Qualifier("exitStatusJob")
+    Job exitStatusJob;
+
     @GetMapping("/launchJob/{id}")
     public void launchJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
@@ -46,6 +50,19 @@ public class JobLaunchController {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
             jobLauncher.run(conditionalJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException |
+                 JobRestartException |
+                 JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/launchExitStatusJobJob/{id}")
+    public void launchExitStatusJobJob(@PathVariable String id) {
+        JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
+        try {
+            jobLauncher.run(exitStatusJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
