@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springbatch</groupId>
-	<artifactId>intro</artifactId>
+	<artifactId>chunk-processing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>intro</name>
-	<description>Intro project for Spring Batch</description>
+	<name>chunk-processing</name>
+	<description>Chunk Processing in Spring Batch</description>
 	<url/>
 	<licenses>
 		<license/>
