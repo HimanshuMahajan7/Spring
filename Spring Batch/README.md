@@ -111,6 +111,16 @@
     * ItemReader<String>
     * ItemReader<Employee>
 
-#### Built in ItemReader<T> implementations
+#### Built-in ItemReader<T> implementations
 * FlatFileReader
+* JsonItemReader
 * JdbcCursorItemReader
+* JdbcPagingItemReader
+* HibernateCursorItemReader
+* HibernatePagingItemReader
+* JpaPagingIteamReader
+* StoredProcedureItemReader
+* MongoItemReader
+* KafkaItemReader
+* JmsItemReader
+* StaxEventItemReader
