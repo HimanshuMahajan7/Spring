@@ -34,7 +34,7 @@
 
 ### Step
 * A unit of work
-* It represent indipendent phase in a bacth job
+* It represents independent phase in a batch job
 * As we know a job can have multiple steps, and this steps could be logically related to each other
 * Example: Generate Report Job > Collect Data > Generate Report > Send Email
 * Two types of steps -
@@ -85,3 +85,32 @@
     3. FAILED
     4. EXECUTING
     5. UNKNOWN
+
+### Custom Exit Status
+* Using Listeners, i.e. StepExecutionListener
+* Using Deciders, i.e. JobExecutionDecider
+
+## Chunk Oriented Processing
+* Chunk Based Step
+* It is used to process data in chunks
+* It has a concept of an Item -> A record which is read from or written to a data source
+* It contains ItemReader, ItemProcessor (optional) and ItemWriter implementations
+* When to use -> To process a large file
+
+#### Chunk
+* A small part of data, or a subset of data
+
+### Item Reader
+* Spring Batch provides us the ItemReader interface to help us read data
+* It is responsible for providing input to our chunk based step
+* It has a single method -> read()
+    * Returns a single item
+* Syntax
+    * ItemReader<T>
+* Example
+    * ItemReader<String>
+    * ItemReader<Employee>
+
+#### Built in ItemReader<T> implementations
+* FlatFileReader
+* JdbcCursorItemReader
