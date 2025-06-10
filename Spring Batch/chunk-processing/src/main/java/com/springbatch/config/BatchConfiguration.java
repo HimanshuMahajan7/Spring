@@ -43,9 +43,9 @@ public class BatchConfiguration {
                 .build();
     }
 
-    @Bean
-    public Job job1(JobRepository jobRepository, Step step1) {
-        return new JobBuilder("Job 1", jobRepository)
+    @Bean("itemReaderJob")
+    public Job itemReaderJob(JobRepository jobRepository, Step step1) {
+        return new JobBuilder("Item Reader Job 1", jobRepository)
                 .start(step1)
                 .build();
     }

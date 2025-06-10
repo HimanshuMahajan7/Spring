@@ -21,18 +21,18 @@ public class JobLaunchController {
     JobLauncher jobLauncher;
 
     @Autowired
-    @Qualifier("job1")
-    Job job;
+    @Qualifier("itemReaderJob")
+    Job itemReaderJob;
 
     @Autowired
-    @Qualifier("conditionalJob")
-    Job conditionalJob;
+    @Qualifier("flatFileItemReaderJob")
+    Job flatFileItemReaderJob;
 
-    @GetMapping("/launchJob/{id}")
-    public void launchJob(@PathVariable String id) {
+    @GetMapping("/launchItemReaderJobJob/{id}")
+    public void launchItemReaderJobJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
-            jobLauncher.run(job, jobParameters);
+            jobLauncher.run(itemReaderJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
@@ -41,11 +41,11 @@ public class JobLaunchController {
         }
     }
 
-    @GetMapping("/launchConditionalJob/{id}")
-    public void launchConditionalJob(@PathVariable String id) {
+    @GetMapping("/launchFlatFileItemReaderJob/{id}")
+    public void launchFlatFileItemReaderJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
-            jobLauncher.run(conditionalJob, jobParameters);
+            jobLauncher.run(flatFileItemReaderJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
