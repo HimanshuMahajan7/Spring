@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-public class BatchConfiguration {
+public class ItemReaderBatchConfiguration {
 
     @Bean
     public ItemReader<String> itemReader() {
-        List<String> productList = new ArrayList<String>();
+        List<String> productList = new ArrayList<>();
         productList.add("Apple");
         productList.add("Banana");
         productList.add("Orange");
