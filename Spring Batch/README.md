@@ -106,10 +106,11 @@
 * It has a single method -> read()
     * Returns a single item
 * Syntax
-    * ItemReader<T>
+    * ItemReader<\T>
 * Example
-    * ItemReader<String>
-    * ItemReader<Employee>
+    * ItemReader\<String>
+    * ItemReader\<Employee>
+    * ItemReader\<Product>
 
 #### Built-in ItemReader<T> implementations
 * FlatFileReader
