@@ -26,11 +26,11 @@ public class JdbcCursorItemReaderBatchConfiguration {
 
     @Bean
     public ItemReader<Product> JdbcCursorItemReader() {
-        JdbcCursorItemReader<Product> productJdbcCursorItemReader = new JdbcCursorItemReader<>();
-        productJdbcCursorItemReader.setDataSource(dataSource);
-        productJdbcCursorItemReader.setSql(SQL_SELECT_PRODUCTS);
-        productJdbcCursorItemReader.setRowMapper(new ProductRowMapper());
-        return productJdbcCursorItemReader;
+        JdbcCursorItemReader<Product> jdbcCursorItemReader = new JdbcCursorItemReader<>();
+        jdbcCursorItemReader.setDataSource(dataSource);
+        jdbcCursorItemReader.setSql(SQL_SELECT_PRODUCTS);
+        jdbcCursorItemReader.setRowMapper(new ProductRowMapper());
+        return jdbcCursorItemReader;
     }
 
     @Bean

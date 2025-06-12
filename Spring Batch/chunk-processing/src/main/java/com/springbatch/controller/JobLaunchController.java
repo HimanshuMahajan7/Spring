@@ -32,6 +32,10 @@ public class JobLaunchController {
     @Qualifier("jdbcCursorItemReaderJob")
     Job jdbcCursorItemReaderJob;
 
+    @Autowired
+    @Qualifier("jdbcPagingItemReaderJob")
+    Job jdbcPagingItemReaderJob;
+
     @GetMapping("/launchItemReaderJobJob/{id}")
     public void launchItemReaderJobJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
@@ -63,6 +67,19 @@ public class JobLaunchController {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
             jobLauncher.run(jdbcCursorItemReaderJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException |
+                 JobRestartException |
+                 JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/launchJdbcPagingItemReaderJob/{id}")
+    public void launchJdbcPagingItemReaderJob(@PathVariable String id) {
+        JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
+        try {
+            jobLauncher.run(jdbcPagingItemReaderJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |

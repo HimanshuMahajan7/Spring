@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class ProductRowMapper implements RowMapper<Product> {
     @Override
     public Product mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+        System.out.println("ResultSet Object: " + resultSet);
         Product product = new Product();
         product.setProductId(resultSet.getInt("product_id"));
         product.setProductName(resultSet.getString("product_name"));
