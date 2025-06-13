@@ -106,7 +106,7 @@
 * It has a single method -> read()
     * Returns a single item
 * Syntax
-    * ItemReader<\T>
+    * ItemReader\<T>
 * Example
     * ItemReader\<String>
     * ItemReader\<Employee>
@@ -125,3 +125,20 @@
 * KafkaItemReader
 * JmsItemReader
 * StaxEventItemReader
+
+### Item Writer
+* Spring Batch provides the ItemWriter interface to help us write data
+* It is responsible for generating the output for our chunk based step
+* It has a single method -> write()
+
+#### Built-in ItemWriter<T> implementations
+* FlatFileItemWriter
+* JsonFileItemWriter
+* JdbcBatchItemWriter
+* HibernateItemWriter
+* JpaItemWriter
+* MongoItemWriter
+* CompositeItemWriter
+* KafkaItemWriter
+* JmsItemWriter
+* StaxEventItemWriter
