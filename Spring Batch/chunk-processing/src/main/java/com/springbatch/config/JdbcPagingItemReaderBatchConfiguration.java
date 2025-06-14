@@ -28,7 +28,7 @@ public class JdbcPagingItemReaderBatchConfiguration {
     DataSource dataSource;
 
     @Bean
-    public ItemReader<Product> JdbcPagingItemReader() throws Exception {
+    public ItemReader<Product> jdbcPagingItemReader1() throws Exception {
         JdbcPagingItemReader<Product> jdbcPagingItemReader = new JdbcPagingItemReader<>();
         jdbcPagingItemReader.setDataSource(dataSource);
 
@@ -48,7 +48,7 @@ public class JdbcPagingItemReaderBatchConfiguration {
     public Step jdbcPagingItemReaderStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
         return new StepBuilder("JDBC Paging Item Reader Step", jobRepository)
                 .chunk(2, transactionManager)
-                .reader(JdbcPagingItemReader())
+                .reader(jdbcPagingItemReader1())
                 .writer(chunk -> {
                     System.out.println("JDBC Chunk Processing Started");
                     chunk.forEach(System.out::println);

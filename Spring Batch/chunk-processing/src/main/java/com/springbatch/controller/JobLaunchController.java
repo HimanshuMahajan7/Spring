@@ -40,6 +40,10 @@ public class JobLaunchController {
     @Qualifier("flatFileItemWriterJob")
     Job flatFileItemWriterJob;
 
+    @Autowired
+    @Qualifier("jdbcBatchItemWriterJob")
+    Job jdbcBatchItemWriterJob;
+
     @GetMapping("/launchItemReaderJobJob/{id}")
     public void launchItemReaderJobJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
@@ -92,11 +96,24 @@ public class JobLaunchController {
         }
     }
 
-    @GetMapping("/launchFlatFileItemWriterJobJob/{id}")
-    public void launchFlatFileItemWriterJobJob(@PathVariable String id) {
+    @GetMapping("/launchFlatFileItemWriterJob/{id}")
+    public void launchFlatFileItemWriterJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
             jobLauncher.run(flatFileItemWriterJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException |
+                 JobRestartException |
+                 JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/launchJdbcBatchItemWriterJob/{id}")
+    public void launchJdbcBatchItemWriterJob(@PathVariable String id) {
+        JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
+        try {
+            jobLauncher.run(jdbcBatchItemWriterJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
