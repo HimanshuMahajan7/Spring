@@ -50,7 +50,7 @@ public class FlatFileItemWriterBatchConfiguration {
     }
 
     @Bean
-    public ItemWriter<Product> flatFileItemWriter() throws Exception {
+    public ItemWriter<Product> flatFileItemWriter() {
         FlatFileItemWriter<Product> flatFileItemWriter = new FlatFileItemWriter<>();
         flatFileItemWriter.setResource(new FileSystemResource("src/main/resources/data/output/product-details-output.csv"));
 

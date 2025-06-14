@@ -51,7 +51,7 @@ public class JdbcBatchItemWriterBatchConfiguration {
     }
 
     @Bean
-    public ItemWriter<Product> jdbcBatchItemWriter() throws Exception {
+    public ItemWriter<Product> jdbcBatchItemWriter() {
         JdbcBatchItemWriter<Product> itemWriter = new JdbcBatchItemWriter<>();
         itemWriter.setDataSource(dataSource);
         itemWriter.setSql(SQL_INSERT_QUERY);
@@ -60,7 +60,7 @@ public class JdbcBatchItemWriterBatchConfiguration {
     }
 
     @Bean
-    public ItemWriter<Product> jdbcBatchNamedParamItemWriter() throws Exception {
+    public ItemWriter<Product> jdbcBatchNamedParamItemWriter() {
         JdbcBatchItemWriter<Product> itemWriter = new JdbcBatchItemWriter<>();
         itemWriter.setDataSource(dataSource);
         itemWriter.setSql(SQL_NAMED_PARAM_INSERT_QUERY);
