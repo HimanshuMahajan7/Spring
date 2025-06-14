@@ -1,4 +1,4 @@
-package com.springbatch.config;
+package com.springbatch.config.reader;
 
 import com.springbatch.reader.ProductNameItemReader;
 import org.springframework.batch.core.Job;
