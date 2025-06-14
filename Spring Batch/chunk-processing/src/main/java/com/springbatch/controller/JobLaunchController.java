@@ -36,6 +36,10 @@ public class JobLaunchController {
     @Qualifier("jdbcPagingItemReaderJob")
     Job jdbcPagingItemReaderJob;
 
+    @Autowired
+    @Qualifier("flatFileItemWriterJob")
+    Job flatFileItemWriterJob;
+
     @GetMapping("/launchItemReaderJobJob/{id}")
     public void launchItemReaderJobJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
@@ -80,6 +84,19 @@ public class JobLaunchController {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
             jobLauncher.run(jdbcPagingItemReaderJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException |
+                 JobRestartException |
+                 JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/launchFlatFileItemWriterJobJob/{id}")
+    public void launchFlatFileItemWriterJobJob(@PathVariable String id) {
+        JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
+        try {
+            jobLauncher.run(flatFileItemWriterJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
