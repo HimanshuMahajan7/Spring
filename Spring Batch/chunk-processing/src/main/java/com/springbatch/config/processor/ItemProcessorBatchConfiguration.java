@@ -1,8 +1,10 @@
 package com.springbatch.config.processor;
 
+import com.springbatch.models.OsProduct;
 import com.springbatch.models.Product;
 import com.springbatch.models.ProductRowMapper;
-import com.springbatch.processor.SimpleProductItemProcessor;
+import com.springbatch.processor.transformer.ComplexProductItemTransformer;
+import com.springbatch.processor.transformer.SimpleProductItemTransformer;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -28,8 +30,8 @@ public class ItemProcessorBatchConfiguration {
     private static final String SQL_SELECT_CLAUSE = "SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE";
     private static final String SQL_FROM_CLAUSE = "FROM PRODUCT_DETAILS";
     private static final String SQL_SORT_KEY = "PRODUCT_ID";
-    private static final String SQL_INSERT_QUERY = "INSERT INTO PRODUCT_DETAILS_OUTPUT VALUES (?, ?, ?, ?)";
     private static final String SQL_NAMED_PARAM_INSERT_QUERY = "INSERT INTO PRODUCT_DETAILS_OUTPUT VALUES (:productId, :productName, :productCategory, :productPrice)";
+    private static final String SQL_OS_PRODUCT_INSERT_QUERY = "INSERT INTO OS_PRODUCT_DETAILS VALUES (:productId, :productName, :productCategory, :productPrice, :taxPercent, :sku, :shippingCost)";
 
     @Autowired
     DataSource dataSource;
@@ -61,17 +63,42 @@ public class ItemProcessorBatchConfiguration {
     }
 
     @Bean
-    public ItemProcessor<Product, Product> simpleItemItemProcessor() {
-        return new SimpleProductItemProcessor();
+    public ItemWriter<OsProduct> complexItemWriter1() {
+        JdbcBatchItemWriter<OsProduct> itemWriter = new JdbcBatchItemWriter<>();
+        itemWriter.setDataSource(dataSource);
+        itemWriter.setSql(SQL_OS_PRODUCT_INSERT_QUERY);
+        itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
+        return itemWriter;
     }
+
+    @Bean
+    public ItemProcessor<Product, Product> simpleItemItemProcessor() {
+    //  return new SimpleProductItemProcessor();
+        return new SimpleProductItemTransformer();
+    }
+
+    @Bean
+    public ItemProcessor<Product, OsProduct> complexItemItemProcessor() {
+        return new ComplexProductItemTransformer();
+    }
+
+//    @Bean("simpleItemProcessorStep")
+//    public Step simpleItemProcessorStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
+//        return new StepBuilder("Simple Item Processor Step", jobRepository)
+//                .<Product, Product>chunk(2, transactionManager)
+//                .reader(jdbcPagingItemReader4())
+//                .processor(simpleItemItemProcessor())
+//                .writer(jdbcBatchNamedParamItemWriter1())
+//                .build();
+//    }
 
     @Bean("simpleItemProcessorStep")
     public Step simpleItemProcessorStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
         return new StepBuilder("Simple Item Processor Step", jobRepository)
-                .<Product, Product>chunk(2, transactionManager)
+                .<Product, OsProduct>chunk(2, transactionManager)
                 .reader(jdbcPagingItemReader4())
-                .processor(simpleItemItemProcessor())
-                .writer(jdbcBatchNamedParamItemWriter1())
+                .processor(complexItemItemProcessor())
+                .writer(complexItemWriter1())
                 .build();
     }
 
