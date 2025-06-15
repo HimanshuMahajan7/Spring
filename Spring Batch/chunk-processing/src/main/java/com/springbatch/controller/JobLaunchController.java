@@ -48,6 +48,10 @@ public class JobLaunchController {
     @Qualifier("simpleItemProcessorJob")
     Job simpleItemProcessorJob;
 
+    @Autowired
+    @Qualifier("filterItemProcessorJob")
+    Job filterItemProcessorJob;
+
     @GetMapping("/launchItemReaderJobJob/{id}")
     public void launchItemReaderJobJob(@PathVariable String id) {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
@@ -131,6 +135,19 @@ public class JobLaunchController {
         JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
         try {
             jobLauncher.run(simpleItemProcessorJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException |
+                 JobRestartException |
+                 JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/launchFilterItemProcessorJob/{id}")
+    public void launchFilterItemProcessorJob(@PathVariable String id) {
+        JobParameters jobParameters = new JobParametersBuilder().addString("param", id).toJobParameters();
+        try {
+            jobLauncher.run(filterItemProcessorJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException |
                  JobRestartException |
                  JobInstanceAlreadyCompleteException |
