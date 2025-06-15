@@ -15,6 +15,7 @@ import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourc
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
+import org.springframework.batch.item.validator.BeanValidatingItemProcessor;
 import org.springframework.batch.item.validator.ValidatingItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -67,12 +68,20 @@ public class ValidatorBatchConfiguration {
         return productValidatingItemProcessor;
     }
 
+    @Bean
+    public BeanValidatingItemProcessor<Product> beanValidatingItemProcessor() {
+        BeanValidatingItemProcessor<Product> beanValidatingItemProcessor = new BeanValidatingItemProcessor<>();
+        beanValidatingItemProcessor.setFilter(true);
+        return beanValidatingItemProcessor;
+    }
+
     @Bean("validatorItemProcessorStep")
     public Step validatorItemProcessorStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
         return new StepBuilder("Validator Item Processor Step", jobRepository)
                 .<Product, Product>chunk(2, transactionManager)
                 .reader(jdbcPagingItemReader6())
-                .processor(validateItemProcessor())
+//                .processor(validateItemProcessor())
+                .processor(beanValidatingItemProcessor())
                 .writer(jdbcBatchNamedParamItemWriter3())
                 .build();
     }
