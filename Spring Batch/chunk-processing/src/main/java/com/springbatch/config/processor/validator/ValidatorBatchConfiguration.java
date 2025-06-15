@@ -1,8 +1,8 @@
-package com.springbatch.config.processor.filter;
+package com.springbatch.config.processor.validator;
 
 import com.springbatch.models.Product;
 import com.springbatch.models.ProductRowMapper;
-import com.springbatch.processor.filter.FilterItemProcessor;
+import com.springbatch.models.ProductValidator;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -15,6 +15,7 @@ import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourc
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
+import org.springframework.batch.item.validator.ValidatingItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-public class FilterDataBatchConfiguration {
+public class ValidatorBatchConfiguration {
 
     private static final String SQL_SELECT_CLAUSE = "SELECT PRODUCT_ID, PRODUCT_NAME, PRODUCT_CATEGORY, PRODUCT_PRICE";
     private static final String SQL_FROM_CLAUSE = "FROM PRODUCT_DETAILS";
@@ -34,7 +35,7 @@ public class FilterDataBatchConfiguration {
     DataSource dataSource;
 
     @Bean
-    public ItemReader<Product> jdbcPagingItemReader5() throws Exception {
+    public ItemReader<Product> jdbcPagingItemReader6() throws Exception {
         JdbcPagingItemReader<Product> jdbcPagingItemReader = new JdbcPagingItemReader<>();
         jdbcPagingItemReader.setDataSource(dataSource);
 
@@ -51,7 +52,7 @@ public class FilterDataBatchConfiguration {
     }
 
     @Bean
-    public ItemWriter<Product> jdbcBatchNamedParamItemWriter2() {
+    public ItemWriter<Product> jdbcBatchNamedParamItemWriter3() {
         JdbcBatchItemWriter<Product> itemWriter = new JdbcBatchItemWriter<>();
         itemWriter.setDataSource(dataSource);
         itemWriter.setSql(SQL_NAMED_PARAM_INSERT_QUERY);
@@ -60,24 +61,26 @@ public class FilterDataBatchConfiguration {
     }
 
     @Bean
-    public ItemProcessor<Product, Product> filterItemProcessor() {
-      return new FilterItemProcessor();
+    public ItemProcessor<Product, Product> validateItemProcessor() {
+        ValidatingItemProcessor<Product> productValidatingItemProcessor = new ValidatingItemProcessor<>(new ProductValidator());
+        productValidatingItemProcessor.setFilter(true);
+        return productValidatingItemProcessor;
     }
 
-    @Bean("filterItemProcessorStep")
-    public Step filterItemProcessorStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
-        return new StepBuilder("Filter Item Processor Step", jobRepository)
+    @Bean("validatorItemProcessorStep")
+    public Step validatorItemProcessorStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) throws Exception {
+        return new StepBuilder("Validator Item Processor Step", jobRepository)
                 .<Product, Product>chunk(2, transactionManager)
-                .reader(jdbcPagingItemReader5())
-                .processor(filterItemProcessor())
-                .writer(jdbcBatchNamedParamItemWriter2())
+                .reader(jdbcPagingItemReader6())
+                .processor(validateItemProcessor())
+                .writer(jdbcBatchNamedParamItemWriter3())
                 .build();
     }
 
-    @Bean("filterItemProcessorJob")
-    public Job filterItemProcessorJob(JobRepository jobRepository, Step filterItemProcessorStep) {
-        return new JobBuilder("Filter Item Processor Job", jobRepository)
-                .start(filterItemProcessorStep)
+    @Bean("validatorItemProcessorJob")
+    public Job validatorItemProcessorJob(JobRepository jobRepository, Step validatorItemProcessorStep) {
+        return new JobBuilder("Validator Item Processor Job", jobRepository)
+                .start(validatorItemProcessorStep)
                 .build();
     }
 }
