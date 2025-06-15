@@ -101,7 +101,7 @@
 * A small part of data, or a subset of data
 
 ### Item Reader
-* Spring Batch provides us the ItemReader interface to help us read data
+Spring Batch provides us the ItemReader interface to help us read data
 * It is responsible for providing input to our chunk based step
 * It has a single method -> read()
     * Returns a single item
@@ -127,7 +127,7 @@
 * StaxEventItemReader
 
 ### Item Writer
-* Spring Batch provides the ItemWriter interface to help us write data
+Spring Batch provides the ItemWriter interface to help us write data
 * It is responsible for generating the output for our chunk based step
 * It has a single method -> write()
 
@@ -142,3 +142,20 @@
 * KafkaItemWriter
 * JmsItemWriter
 * StaxEventItemWriter
+
+### Item Processor
+Spring Batch provides the ItemProcessor interface to help us introduce business logic between our ItemReader and ItemWriter
+* It can be for Transformation, Validation, Filtering
+* It has single method -> process()
+    * Which takes an item as argument and returns an item
+* Chaining of multiple processor is supported
+    * We can chaing multiple ItemProcessor together, so their could be scenarios where we may have to include multiple ItemProcessors with in our chunk based step, each performing its own processing logic.
+    * And for that we have something called as <b>CompostieItemProcessor</b>
+* Note: It is optionsl
+    * So in case of chunk based step, which has no ItemProcessor implementation, the iteam that is read by the ItemReader is sent as it is to the ItemWriter. There is no change in the content.
+* Syntax
+    * <b>ItemProcesor\<T></b>
+* Example
+    * ItemProcessor\<String>
+    * ItemProcessor\<Employee>
+    * ItemProcessor\<Product>
