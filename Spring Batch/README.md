@@ -159,3 +159,12 @@ Spring Batch provides the ItemProcessor interface to help us introduce business 
     * ItemProcessor\<String>
     * ItemProcessor\<Employee>
     * ItemProcessor\<Product>
+
+## Listeners in Spring Batch
+* JobExecutionListener
+* StepExecutionListener
+* ChunkListener
+* ItemReadListener
+* ItemProcessListener
+* ItemWriteListener
+* SkipListener 
