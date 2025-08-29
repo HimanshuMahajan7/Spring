@@ -66,6 +66,7 @@
 * Spring is versatile framework
     * Can be integrated with any other framework available in the market.
     * Compatible with other frameworks.
+* Spring Framework is licensed under VM Ware.
 
 ### Spring Modules
 1. Spring Core
@@ -77,3 +78,83 @@
 7. Spring Security
 8. Spring Social
 9. Spring Batch
+10. Spring Data JPA
+11. Spring REST
+
+### 1. Spring Core
+* It is base module in Spring Framework.
+* Spring Core Module provides fundamental concepts of Spring Framework
+    1. IOC Container (Inversion of Control)
+    2. Dependency Injection
+    3. Bean Life Cycle
+    4. Bean Scopes
+    5. Autowiring
+
+### 2. Spring Context
+* It will deal with configurations required for our Spring Application.
+
+### 3. Spring AOP
+* Aspect Oriented Programming.
+* APO is used to business logic and secondary logic in the project.
+    * Secondary logics like
+        * Security
+        * Logging
+        * Transaction
+        * Auditing
+        * Exception Handling
+* Note: If we combine business logics & secondary logics then we will face maintenance issues of our project.
+
+### 4. Spring JDBC
+* Spring JDBC is used to simplify Database Communication logic.
+* In java jdbc we need to write the boilerplate code (repeated code)
+    * Load Driver
+    * Get Connection
+    * Create Statement
+    * Execute Query
+    * Close Connection
+* Using Spring JDBC we can directly execute the query.
+* Boilerplate code is taken care by Spring JDBC.
+
+### 5. Spring Web MVC
+* It is used to develop both Web Applications and Distributed Applications.
+    * Web Applications (C 2 B)
+        * Gmail, Facebook, 
+    * Distributed Application
+        * IRCTC <---> MakeMyTrip
+        * Passport <---> Aadhar App
+
+### 6. Spring ORM
+* Object Relational Mapping.
+* Spring Framework having integration with ORM frameworks
+    * Example: Spring ORM, Spring Data JPA etc
+* Note: JDBC represents the data in text formate, where as Hibernate ORM represents the data in Object formate.
+
+### 7. Spring Security
+* Security is very crucial for every application.
+* Using Spring Security we can implement Authentication & Authorization.
+* Spring Security with
+    * OAuth2.0
+    * JWT
+
+### 8. Spring Batch
+* Batch mean bulk operation
+    * Reading data from Excel and store it into database table
+    * Sending Monthly statements to customers in email
+    * Sending Remainders to customers as bulk SMS
+
+### 9. Spring Cloud
+* It provides some common tools to quickly build distributed systems.
+* It provide
+    * Service Registry to register all our microservices at one place.
+    * API Gateway to have single entry point for all our APIs.
+    * Loadbalancer
+    * Monitoring
+    * Circuit Breaker (Fault Tolerant / Resilience Systems)
+    * Distributed Messaging
+    * Routing
+
+### 10. Spring Test
+* It provides Unit Test Framework.
+
+### 11. Spring REST
+* It is used to create RESTfull APIs.
