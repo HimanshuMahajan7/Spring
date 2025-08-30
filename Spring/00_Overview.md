@@ -33,10 +33,10 @@
     * Python -> DJango, Flask
     * Salesforce -> Lightening
 
-`Note`: Frameworks will be developed using Programing Languages only.
+`Note`: Frameworks will be developed using Programming Languages only.
 
 ### Boiler Plate Code / Redundant Code?
-* If we are  writing same code fo multiple times then it is called as Boiler Plate / Redundent Code.
+* If we are  writing same code fo multiple times then it is called as Boiler Plate / Redundant Code.
 
 ### Application Architecture?
 1. Monolith AArchitecture
@@ -158,3 +158,133 @@
 
 ### 11. Spring REST
 * It is used to create RESTfull APIs.
+
+## Spring Core
+* Spring Core Module is all about managing dependencies among the classes with loosely coupling
+* In project, we will develop several classes. All those classes can be categorized in 3 types
+    * POJO
+    * Java Bean
+    * Component
+
+#### What is POJO?
+* **Plain Old Java Object**
+* Any Java class that can be compiled by using only JDK software is called as POJO class.
+* Examples:
+    * Valid Pojo
+        ```java
+        class Demo1 {
+            int id;
+            String name;
+        }
+        ```
+        ```java
+        class Demo2 extends Thread {
+            int id;
+            String name;
+        }
+        ```
+        ```java
+        class Demo3 implements Runnable {
+            void run() {
+
+            }
+        }
+        ```
+
+    * Invalid POJO:
+        ```java
+        class Demo implements Servlet {
+            // run method
+        }
+        ```
+
+#### What is Java Bean?
+* Any Java class that follows bean specification rules is called as Java Bean
+    1. Class should implement Serializable interface
+    2. Class should have private data members (variables)
+    3. Every private variable should have a public getter and public setter method
+    4. Class should have zero param constructor
+* Bean classes are used to write business logic and to store & retrieve the data.
+
+#### What is Component?
+* The Java classes that contains business logic are called as Component Classes.
+* Example:
+    * Controllers: Will have logic to deal with Request & Response
+    * Service: Will have business logic of our project
+        Example: Generate OTP, Send OTP, Send eMAIL, Encrypt & Decrypt password, etc
+    * DAO: Will contain the logic to communicate with Database
+
+#### Way Java classes communicated each other?
+* In Java onc class can talk to another class in two ways
+    1. Inheritance (IS - A)
+    2. Composition (Has - A)
+
+#### What is dependency Injection?
+* The process of injecting one class object into another class is called as **Dependency Injection**.
+* We can perform dependency injection in 3 ways
+    * Setter Injection
+    * Constructor Injection
+    * Field Injection
+
+#### 1. Setter Injection
+* Setter Injection means, injecting dependent object into target object using target class setter method.
+
+    ```java
+    class Car {
+        private IEngine eng;
+
+        public void setEng(IEngine eng) {
+            this.eng = eng;
+        }
+
+        public void drive() {
+            int start = eng.start();
+        }
+    }
+    ```
+
+#### 2. Constructor Injection
+* Constructor Injection means injecting a dependent object into a target object using target class constructor.
+
+    ```java
+    class Car {
+        private IEngine eng;
+
+        public Car(IEngine eng) {
+            this.eng = eng;
+        }
+
+        public void drive() {
+            int start = eng.start();
+        }
+    }
+    ```
+
+#### 3. Field Injection
+* Field injection means injecting the dependent object into target class using target class variable.
+
+    ```java
+    class Car {
+        private IEngine eng;
+
+        public void drive() {
+            int start = eng.start();
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Class<?> clz = Class.forName("in.himanshu.Car");
+            Object object = clz.newInstance();
+            Car carObject = (Car) object;
+
+            Field engField = clz.getDeclaredField("eng");
+            engField.setAccessible(true);
+
+            // Injecting value to variable
+            engField.set(carObj, new PetrolEngine());
+
+            carObj.drive();
+        }
+    }
+    ```
