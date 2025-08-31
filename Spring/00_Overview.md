@@ -339,3 +339,31 @@
 * For Setter Injection we need to use `<property/>` tag.
 * FOr Constructor Injection we need to use `<constructor-arg>` tag.
 * If both we do both the injection, then Setter Injection will override the Constructor Injection.
+
+### Beans Scope
+* Scope represents how many objects should be created for a Spring Bean.
+* In the Spring Framework, we have below scopes:
+    1. Singleton (**default scope)
+    2. Prototype
+    3. Request
+    4. Session
+* To represent bean scope, we will use **scope** attribute
+    * `<bean id="id" class="package.ClassName" scope="singleton | prototype | request | session" />`
+
+#### Singleton Scope
+* `Singleton Scope` means only one object will be created for the class in IoC Container.
+
+#### Prototype Scope
+* `Prototype Scope` means every time new object will be created.
+
+##### Note: Request & Session scopes are related to Web MVC module.
+
+#### Why is Spring Bean by default Singleton?
+* **To save memory of JVM**
+* To save memory of JVM Spring team made singleton as default scope for the spring beans.
+* Example: Rest Controllers, Controllers, Services and DAOs will be considered as Singleton in the project
+
+* Example:
+    * TicketGenerator class is used to generate Ticket for every Customer
+    * TicketGenerator -> Singleton
+    * Ticket -> Prototype
