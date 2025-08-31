@@ -367,3 +367,109 @@
     * TicketGenerator class is used to generate Ticket for every Customer
     * TicketGenerator -> Singleton
     * Ticket -> Prototype
+
+---
+
+### Autowiring
+* We can inject dependent bean into target bean in two ways
+    1. Manual Wiring
+    2. AutoWiring
+
+#### 1. Manual Wiring
+* Manual Wiring means programmer will inject dependent object into target object using `<property/>` tag or `<constructor-arg/>` tag.
+    ```xml
+    <bean id="petrolEng" class="org.example.beans.impl.PetrolEngine"/>
+
+    <bean id="car" class="org.example.beans.Car">
+        <property name="eng" ref="petrolEng"/>
+        <constructor-arg name="eng" ref="dieselEng" />
+    </bean>
+    ```
+
+#### 2. Autowiring
+* Autowiring means IoC Container will identify the dependent bean, and it will inject into target bean.
+* We don't need to use any `ref` attribute in bean configuration.
+* Autowiring will work on below modes:
+    1. byName
+    2. byType
+    3. constructor
+    4. no
+* Autowiring will not work by default, we have to enable autowiring on target bean like below
+    * `<bean id="id" class="package.ClassName" auto-wire="byName | byType | constructor" />`
+* **Note: Autowiring will only work for Reference Type variable (not applicable for Primitive Types)
+
+    #### 1. byName
+    * `byName` means IoC will identify the dependent bean object based on `bean id` or `bean name`.
+    * Example:
+        ```java
+        public class Car {
+            IEngine eng;
+
+            public Car() {
+                System.out.println("Car :: Zero Param Constructor");
+            }
+
+            public void setEng(IEngine eng) {
+                System.out.println("setEng() method called");
+                this.eng = eng;
+            }
+
+            public void drive() {
+            }
+        }
+        ```
+
+        ```xml
+        <bean id="eng" class="org.example.beans.impl.PetrolEngine"/>
+        <bean id="dieselEng" class="org.example.beans.impl.DieselEngine"/>
+        <bean id="car" class="org.example.beans.Car" autowire="byName" />
+        ```
+
+    * In the above example the Car class variable name `eng` is matched with `PetrolEngine` bean id hence **PetrolEngine** obj is injected into Car class object.
+
+    #### 2. byType
+    * `byType` means IoC will identify the dependent bean object based on `data type` of the variable in Target class.
+    * If one interface having two implementations then there is a chance of getting an ambiguity problem, to overcome that we need to use *autowire-candidate* attribute.
+        * autowire-candidate="true" -> Eligible for Autowiring
+        * autowire-candidate="false" -> Not Eligible for Autowiring
+    
+    * Example:
+        ```java
+        IEngine eng; // Data TYpe of eng is IEngine, which is an interface
+        ```
+        ```xml
+        <bean id="eng" class="org.example.beans.impl.PetrolEngine" autowire-candidate="true"/>
+        <bean id="dieselEng" class="org.example.beans.impl.DieselEngine" autowire-candidate="false"/>
+
+        <bean id="car" class="org.example.beans.Car" autowire="byType" />
+        ```
+
+    * **Note: As an alternate for `autowire-candidate="true"`, we can use `primary="true"` to consider bean for Autowiring.
+        * Example:
+        ```xml
+        <bean id="eng" class="org.example.beans.impl.PetrolEngine" primary="true"/>
+        <bean id="dieselEng" class="org.example.beans.impl.DieselEngine"/>
+
+        <bean id="car" class="org.example.beans.Car" autowire="byType" />
+        ```
+
+    #### 3. constructor
+    * It is used to perform Autowiring by calling target class constructor.
+    * Example:
+        ```java
+        public Car(IEngine eng) {
+            System.out.println("Car :: Param Constructor");
+            this.eng = eng;
+        }
+        ```
+        ```xml
+        <bean id="eng" class="org.example.beans.impl.PetrolEngine" autowire-candidate="false"/>
+        <bean id="dieselEng" class="org.example.beans.impl.DieselEngine" autowire-candidate="true"/>
+
+        <bean id="car" class="org.example.beans.Car" autowire="constructor" />
+        ```
+    
+    #### 4. no
+    * If we don't want autowiring or want to disable the autowiring then we can go for `autowire="no"` mode.
+
+---
