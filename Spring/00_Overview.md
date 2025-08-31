@@ -288,3 +288,27 @@
         }
     }
     ```
+
+### IOC Container
+* **Inversion Of Control**
+* The IoC is responsible for Dependency Injection in Spring Application.
+* Dependency Injection means creating and injecting dependent bean objects into target bean classes.
+* Note: IoC Container will manage the life cycle of Spring Beans.
+
+#### What is Spring Bean?
+* Any Java class whose lifecycle (creation & destruction) is managed by IOC is called as Spring Bean.
+* We can represent Java class as Spring Bean in two ways:
+    1. XML Approach
+        * `<bean id="id1" class="pkg.ClassName"/>`
+    2. Annotation Approach (Recommended)
+        * @Component, @Service, @Repository, etc
+* Note: In Spring, we can use both XML & Annotation approaches. SpringBoot will support only Annotations (no xml).
+
+#### How to start the IoC in Spring?
+1. BeanFactory
+2. ApplicationContext (recommended)
+    * Example: `ApplicationContext context = new ClassPathXmlApplicationContext(String configFIle);`
+
+* Note: Bean Configuration file contains Bean Definitions
+    * Target Class, Dependent Class, Dependency Injection Type
+* Note: When IoC container starts, it will read the bean definitions from the Bean Configuration File and it will perform Dependency Injection.
