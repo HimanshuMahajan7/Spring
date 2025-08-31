@@ -305,7 +305,7 @@
 * Note: In Spring, we can use both XML & Annotation approaches. SpringBoot will support only Annotations (no xml).
 
 #### How to start the IoC in Spring?
-1. BeanFactory
+1. BeanFactory (Outdated/Deprecated)
 2. ApplicationContext (recommended)
     * Example: `ApplicationContext context = new ClassPathXmlApplicationContext(String configFIle);`
 
@@ -319,3 +319,23 @@
 3. Create Required Java classes
 4. Create Bean Configuration File and configure Bean Definitions
 5. Create Main class and start IOC Container to test the application
+
+#### Differences b/w BeanFactory & ApplicationContext?
+* BeanFactory interface having `XmlBeanFactory` as implementation class.
+    * Example: `BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("beans.xml"));`
+* ApplicationContext interface having `ClassPathXmlApplicationContext` as implementation class.
+    * Example: `ApplicationContext context = new ClassPathXmlApplicationContext("bean.xml");`
+* BeanFactory will follow Lazy Loading concept that means when we request then only it will create Bean object.
+* ApplicationContext will follow Eager Loading fo Singleton Beans, for Prototype Beans it will follow Lazy Loading
+* Note: Spring Bean default scope is Singleton
+* `XmlBeanFactory` is deprecated/outdated, it is not available in current versions of Spring.
+* It is recommended to create IoC using `ApplicationContext`.
+
+#### Eager Loading & Lazy Loading
+* Eager Loading means creating objects for Spring Bean when IoC starts.
+* Lazy Loading means creating objects for Spring Bean when we call getBean() method.
+
+#### Setter Injection vs Constructor Injection
+* For Setter Injection we need to use `<property/>` tag.
+* FOr Constructor Injection we need to use `<constructor-arg>` tag.
+* If both we do both the injection, then Setter Injection will override the Constructor Injection.
