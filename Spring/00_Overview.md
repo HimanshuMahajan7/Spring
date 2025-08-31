@@ -312,3 +312,10 @@
 * Note: Bean Configuration file contains Bean Definitions
     * Target Class, Dependent Class, Dependency Injection Type
 * Note: When IoC container starts, it will read the bean definitions from the Bean Configuration File and it will perform Dependency Injection.
+
+#### First Application Development using Spring Core Module
+1. Create Maven Project in IDE
+2. Add Spring Core Dependency in pom.xml file (www.mvnrepository.com)
+3. Create Required Java classes
+4. Create Bean Configuration File and configure Bean Definitions
+5. Create Main class and start IOC Container to test the application
