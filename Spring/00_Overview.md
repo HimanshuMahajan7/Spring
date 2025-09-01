@@ -470,6 +470,107 @@
         ```
     
     #### 4. no
-    * If we don't want autowiring or want to disable the autowiring then we can go for `autowire="no"` mode.
+    * If we don't want autowiring or want to disable the autowiring, then we can go for `autowire="no"` mode.
 
 ---
+
+### Spring Bean Life Cycle
+* Life cycle means starting to end or birth to death
+    * Thread Life Cycle
+    * Servlet Life Cycle
+    * JSP Life Cycle
+    * Spring Bean Life Cycle
+* Spring Bean object creation and object destruction will be taken care by IoC Container.
+* Spring Bean Life Cycle will be managed by IoC Container.
+* We can perform some operations using Bean Life Cycle Methods
+    * init()
+    * destroy()
+* Spring Bean Life Cycle methods we can execute in three ways
+    1. XML Approach (Declarative)
+    2. Programmatic Approach
+    3. Annotation Approach
+
+
+#### 1. XML Approach
+* \<bean id="motor" class="org.example.Motor" `init-method`="start" `destroy-method`="stop" />
+* **init-method**: This attribute represents the method which should be called after a bean object is created.
+* **destroy-method**: This attribute represents the method which should be called when a bean object is removed from the IoC Container.
+* Example:
+    ```java
+    public class Motor {
+        public Motor() {
+            System.out.println("Motor :: Constructor");
+        }
+
+        public void start() {
+            System.out.println("Motor Started...");
+        }
+
+        public void doWork() {
+            System.out.println("Motor Pulling Water...");
+        }
+
+        public void stop() {
+            System.out.println("Motor Stopped...");
+        }
+    }
+    ```
+    ```xml
+    <!-- XML Approach -->
+    <bean id="motor" class="org.example.Motor" init-method="start" destroy-method="stop" />
+    ```
+
+#### 2. Programmatic Approach
+* We need to implement predefined interfaces provided by Spring Framework
+    * `InitializingBean`: afterPropertiesSet()
+    * `DisposableBean`: destroy()
+* Example:
+    ```java
+    public class MotorProgrammaticApproach implements InitializingBean, DisposableBean {
+        public MotorProgrammaticApproach() {
+            System.out.println("MotorProgrammaticApproach :: Constructor");
+        }
+
+        public void doWork() {
+            System.out.println("MotorProgrammaticApproach Pulling Water...");
+        }
+
+        @Override
+        public void afterPropertiesSet() throws Exception {
+            System.out.println("MotorProgrammaticApproach Started ...");
+        }
+
+        @Override
+        public void destroy() throws Exception {
+            System.out.println("MotorProgrammaticApproach Stopped !!!!");
+        }
+    }
+    ```
+
+#### 3. Annotation Approach
+* We need to used below annotations to obtain the Spring Bean Lifecycle
+    * `@PostConstruct`: It represents init method
+    * `@PreDestroy`: It represents destroy method
+* Note: This annotations are not available in Spring framework they are from Java and now from Jakarta.
+* Code Example:
+    ```java
+    public class MotorAnnotationApproach {
+        public MotorAnnotationApproach() {
+            System.out.println("MotorAnnotationApproach :: Constructor");
+        }
+
+        public void doWork() {
+            System.out.println("MotorAnnotationApproach Pulling Water...");
+        }
+
+        @PostConstruct
+        public void m1() {
+            System.out.println("MotorAnnotationApproach Started...");
+        }
+
+        @PreDestroy
+        public void m2() {
+            System.out.println("MotorAnnotationApproach Stopped...");
+        }
+    }
+    ```

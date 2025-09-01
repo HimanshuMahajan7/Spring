@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- XML Approach -->
+    <bean id="motor" class="org.example.Motor" init-method="start" destroy-method="stop" />
+    <bean id="motorXmlApproach" class="org.example.MotorXmlApproach" init-method="start" destroy-method="stop" />
+
+    <!-- Programmatic Approach -->
+    <bean id="motorProgrammaticApproach" class="org.example.MotorProgrammaticApproach" />
+
+    <!-- Annotation Approach -->
+    <bean id="motorAnnotationApproach" class="org.example.MotorAnnotationApproach" />
+
+</beans>
