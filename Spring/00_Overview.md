@@ -574,3 +574,22 @@
         }
     }
     ```
+
+---
+
+### Annotations
+* Annotation Represents Metadata
+* Introduced in Java 1.5 version
+* From Spring Framework 
+* Annotations are alternate for XML configurations
+* In the Spring Framework, we have several annotations
+    1. @Configuration
+    2. @ComponentScan
+    3. @Component
+    4. @Service
+    5. @Repository
+    6. @Scope
+    7. @Autowired
+    8. @Qualifier
+    9. @Primary
+    10. @Bean
