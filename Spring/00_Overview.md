@@ -593,3 +593,35 @@
     8. @Qualifier
     9. @Primary
     10. @Bean
+
+
+#### 1. @Configuration
+* To represent java class as Configuration class
+
+#### 2. @ComponentScan
+* To identify Spring Bean classes in the project
+
+#### 3. @Component
+* To represent java class as Spring Bean
+
+#### 4. @Service
+* To represent java class as Spring Bean (Business layer classes)
+
+#### 5. @Repository
+* To represent java class as Spring Bean (Persistence layer classes)
+
+#### 6. @Scope
+* To represent bean scope
+
+#### 7. @Autowired
+* To perform dependency injection
+
+#### 8. @Qualifier
+* To perform autowiring
+
+#### 9. @Primary
+* To represent primary bean for Autowiring
+
+#### 10. @Bean
+* To call the method which returns bean object
+* This is method level Annotation
