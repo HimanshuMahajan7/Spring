@@ -625,3 +625,21 @@
 #### 10. @Bean
 * To call the method which returns bean object
 * This is method level Annotation
+
+---
+
+### Spring Boot
+* Spring Boot is one approach to develop Spring based Applications with less configuration.
+    * Spring Boot = Spring Framework - XML Configuration
+* Spring Boot is not replacement for Spring Framework. Boot developed on top of Spring Framework.
+* `Note`: All Spring Framework concepts can be used in Spring Boot also.
+* Spring Boot makes it easy to create stand-alone, production-grade, Spring based Applications that you can "just run".
+
+#### Spring Boot Advantages
+* Less Configuration
+* Pom Starters
+    * Example: web-starter, jpa-starter, security-starter, mail-starter
+* Auto Configuration
+* Embedded Servers
+    * Example: Tomcat, Jetty, Netty
+* Actuators (Production Ready Features)
