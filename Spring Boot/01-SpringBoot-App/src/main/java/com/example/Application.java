@@ -1,7 +1,9 @@
 package com.example;
 
+import com.example.util.PasswordUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Application {
@@ -10,4 +12,8 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	@Bean
+	public PasswordUtils getPasswordUtils() {
+		return new PasswordUtils();
+	}
 }

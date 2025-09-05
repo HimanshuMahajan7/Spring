@@ -32,3 +32,35 @@
     * RELEASE/FINAL: Project Development Completed
 * packageName: It represent base package in project
     * in.ashokit.passport
+
+### Spring Boot Application Folder Structure
+* `src/main/java`: To keep our project source code
+    * `Application.java`: It is start class of the spring boot (Main Class)
+* `src/main/resources`: To keep project configuration files
+    * `application.properties` / `application.yml`
+* `src/test/java`: To keep unit test code (junit)
+    * `ApplicationTest.java`
+* `src/test/resources`: Unit testing related config files goes here
+* `Maven Dependencies`: Downloaded jars will be available here
+* `pom.xml`: Maven configuration file (dependencies)
+
+
+### Spring Boot Start Class
+```java
+@SpringBootApplication
+public class Application {
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+}
+```
+
+* It is entry point for boot application execution.
+* **`@SpringBootApplication`** is equal to below three annotations
+    * `@SpringBootConfiguration`
+    * `@EnableAutoConfiguration`
+    * `@ComponentScan`
+
+* Spring Boot start class will act as a Configuration class because of `@SpringBootConfiguration` annotation.
+* In Spring Boot application auto configuration feature will be available because of `@EnableAutoCOnfiguration` annotation.
+* Component Scan wil be performed in Spring Boot because of `@ComponentScan` annotation.
