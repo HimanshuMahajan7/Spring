@@ -88,3 +88,22 @@ public class Application {
 * run() method will call runners.
 * run() method will return context of IoC container.
 * run() method will register the listeners.
+
+#### What is **Banner** in Spring Boot?
+* When we run Spring Boot Application, it will print the Spring logo on the console that is called as Banner in Spring Boot.
+    ```
+    .   ____          _            __ _ _
+    /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+    \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|_| |_|_| |_\__, | / / / /
+    =========|_|==============|___/=/_/_/_/
+    ```
+* Spring Boot Banner have three modes:  
+    * Off
+    * Log
+    * Console (default)
+* We can set banner mode using below property in "application.properties" file
+    * `spring.main.banner-mode=off`
+* We can customize banner text in Spring Boot Application.
+    * By creating "banner.txt" file in src/main/resources folder.
