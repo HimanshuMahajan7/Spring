@@ -64,3 +64,27 @@ public class Application {
 * Spring Boot start class will act as a Configuration class because of `@SpringBootConfiguration` annotation.
 * In Spring Boot application auto configuration feature will be available because of `@EnableAutoCOnfiguration` annotation.
 * Component Scan wil be performed in Spring Boot because of `@ComponentScan` annotation.
+
+
+### What is `SpringApplication.run()` method?
+* Spring Boot start class main method() will call SpringApplication.run() method.
+* `SpringApplication.run()` is entry point for boot application execution.
+* This `run()` method will return reference of IoC.
+
+#### **`SpringApplication`** class
+* **`SpringApplication`** is a predefined class and it will identify what type of application we have created based on the dependencies added in pom.xml file.
+    * standalone (spring-boot-starter)
+        * For standalone app, It wil use `AnnotationConfigApplicationContext` class to start IoC container.
+    * web app    (spring-boot-starter-web)
+        * For web applications, it will use `AnnotationConfigServletWebServerApplicationContext` class to start IoC container.
+    * reactive   (spring-boot-webflux-starter)
+        * For reactive app, `AnnotationConfigReactiveWebServerApplicationContext` class will be used to start IoC container.
+* Note: If all the three dependencies are used at the same time then the preference will be given to `spring-boot-starter-web` and `AnnotationConfigServletWebServerApplicationContext` will be used to create IoC container.
+
+#### **`run()`** method
+* run() method will print the banner on the console.
+* run() method will start IoC container.
+* rin() method will load the properties.
+* run() method will call runners.
+* run() method will return context of IoC container.
+* run() method will register the listeners.
