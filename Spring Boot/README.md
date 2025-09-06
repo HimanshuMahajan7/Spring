@@ -70,6 +70,7 @@ public class Application {
 * Spring Boot start class main method() will call SpringApplication.run() method.
 * `SpringApplication.run()` is entry point for boot application execution.
 * This `run()` method will return reference of IoC.
+* The return type of run() is `ConfigurableApplicationContext`.
 
 #### **`SpringApplication`** class
 * **`SpringApplication`** is a predefined class and it will identify what type of application we have created based on the dependencies added in pom.xml file.
@@ -107,3 +108,32 @@ public class Application {
     * `spring.main.banner-mode=off`
 * We can customize banner text in Spring Boot Application.
     * By creating "banner.txt" file in src/main/resources folder.
+
+
+### Runners in Spring Boot
+* Runners are used to execute the logic only once the boot application is started.
+* SpringApplication.run() method will call the Runners.
+* In Spring Boot we have two types of RUnners:
+    1. ApplicationRunner (I)
+    2. CommandLineRunner (I)
+* Code Example:
+    * ApplicationRunner: `run(ApplicationArguments args)`
+        ```java
+        @Component
+        public class MyAppRunner implements ApplicationRunner {
+            @Override
+            public void run(ApplicationArguments args) throws Exception {
+                System.out.println("AppRunner :: run() method executed...");
+            }
+        }
+        ```
+    * CommandLineRunner: `String... args`
+        ```java
+        @Component
+        public class MyCmdRunner implements CommandLineRunner {
+            @Override
+            public void run(String... args) throws Exception {
+                System.out.println("CmdRunner :: run() method executed...");
+            }
+        }
+        ```
