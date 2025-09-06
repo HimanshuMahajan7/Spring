@@ -186,3 +186,13 @@ public class Application {
     * To automate database configuration
         1. auto_ddl: Dynamic Schema Generation
         2. show_sql: Display generated queries on the console
+
+
+#### First Application Development using Spring Data JPA
+1. Create Spring Starter Project with the below dependencies
+    * spring-boot-starter-data-jpa
+    * mysql-connector
+2. Create entity class and map with database table using annotations
+3. Create Repository Interface
+4. Configure Database source properties int application.properties / application.yml
+5. Run the application and test the functionality
