@@ -137,3 +137,52 @@ public class Application {
             }
         }
         ```
+
+---
+
+### Spring Data JPA
+* Spring Data JPA is used to develop Persistence layer in the application.
+* Spring Data JPA provides ready-made methods to perform CRUD operations in DB.
+* When we go for Spring Data JPA two interfaces are available:
+    1. CrudRepository (I)
+    2. JpaRepository (I)
+* Note: JpaRepository = CrudRepository + Pagination Methods + Sorting Methods
+
+
+#### Spring Data JPA Terminology
+1. Data Source Object
+    * Data Source properties we can configure in application.properties or application.yml
+2. Entity Class
+    * The class which is mapped with database table
+    * Annotations:
+        * @Entity
+        * @Table
+        * @Id
+        * @Column
+3. Repository Interface:
+    * For table, we will create one repository interface to perform CRUD operations
+        ```java
+        public interface StudentRepository extends CrudRepository<Entity, Id> {
+
+        }
+        ```
+    * Note: By using StudentRepository we can perform CRUD operations in STUDENT_TBL
+    * Note: For our Repository Interface, the implementation will be provided in the runtime using Proxy Class.
+4. Repository Methods:
+    * Ready-made methods are provided by Data JPA to perform CRUD operations
+        1. `save(Entity)`
+        2. `saveAll(Iterable<Entity>)`
+            * Note: Above, two methods are called as "UPSERT" methods (UPDATE + INSERT).
+        3. `findById(Id)`
+        4. `findAllById(Iterable<Id>)`
+        5. `findAll()`
+        6. `count()`
+        7. `existById(Id)`
+        8. `deleteById(Id)`
+        9. `deleteAllById(Iterable<Id>)`
+        10. `deleteAll()`
+
+5. ORM Properties
+    * To automate database configuration
+        1. auto_ddl: Dynamic Schema Generation
+        2. show_sql: Display generated queries on the console
