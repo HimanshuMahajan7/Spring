@@ -197,12 +197,17 @@ public class Application {
 4. Configure Database source properties int application.properties / application.yml
 5. Run the application and test the functionality
 
+#### Ways to perform database operation using JPA
+1. Using JPA pre-defined methods (Select + Non-Select)
+2. Using findByXXX methods (Note: only for select operation)
+3. Using Custom Queries (Select + Non-Select)
+
 #### **`findByXXX`** methods in Data JPA
 * By using `findByXXX()` methods we can retrieve the data based on the non-primary key columns also.
 * When we write `findByXXX()` method, JPA will construct query based on method name.
 * Method naming convention is very important for `findByXXX()` methods.
 * Using `findByXXX()` methods we can perform select operations only (retrieval). INSERT / UPDATE / DELETE operations we can't do using findBy methods.
-* Note: In findByXXX() method syntax we will use entity variable names.
+* Note: In `findByXXX()` method syntax we will use entity variable names.
 * Code Example:
     * Entity Class
         ```java
@@ -227,3 +232,30 @@ public class Application {
             List<Student> findByGenderAndRankGreaterThanEqual(String gender, int rank);
         }
         ```
+
+#### Custom Queries
+* We can also execute Custom Queries in JPA.
+* To execute custom queries, we need to use `@Query` annotation
+* `@Query` will support for executing both HQL queries and Native SQL queries also.
+    * **HQL**: Hibernate Query Language (Database Independent Queries)
+        * In HQL, we will use Entity class name and Entity class variable to write a query.
+        * HQL queries will convert to SQL queries by **Dialect** class
+        * If we change app from one DB to another DB, then no need to change any query because Dialect class will take care of the query conversion.
+        * Performance wise, HQL query will give poor performance because of query conversion.
+    * **SQL**: Structured Query Language (Database Dependent Queries)
+        * In SQL, we will use table name and column name to write the queries.
+        * SQL queries will directly execute in database.
+        * If we change the app from one DB on another DB then all queries may not execute.
+        * Performance wise, SQL query will give better performance than HQL.
+
+#### Selection and Projection
+* **Selection**:
+    * Retrieving specific rows from the table. We can achieve by this using `where` keyword in the query.
+    * Example: `select * from student where gender = "Male";`
+
+* **Projection**:
+    * Retrieving specific columns from the table is called as Projection.
+    * We can achieve by using column names in a query
+    * Example: `select name, rank, gender from student;`
+
+* `Note`: We can combine selection and projection in a single query.

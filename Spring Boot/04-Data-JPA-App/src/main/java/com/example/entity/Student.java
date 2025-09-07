@@ -60,11 +60,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", rank=" + rank +
-                ", gender='" + gender + '\'' +
-                '}';
+        return "Student[" + "id=" + id + ", name='" + name + ", rank=" + rank + ", gender='" + gender + "]";
     }
 }
