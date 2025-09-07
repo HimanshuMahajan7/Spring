@@ -17,6 +17,15 @@ public class Student {
     private Long rank;
     private String gender;
 
+    public Student() { }
+
+    public Student(Integer id, String name, Long rank, String gender) {
+        this.id = id;
+        this.name = name;
+        this.rank = rank;
+        this.gender = gender;
+    }
+
     public Integer getId() {
         return id;
     }
