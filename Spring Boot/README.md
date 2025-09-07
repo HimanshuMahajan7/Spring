@@ -196,3 +196,34 @@ public class Application {
 3. Create Repository Interface
 4. Configure Database source properties int application.properties / application.yml
 5. Run the application and test the functionality
+
+#### **`findByXXX`** methods in Data JPA
+* By using `findByXXX()` methods we can retrieve the data based on the non-primary key columns also.
+* When we write `findByXXX()` method, JPA will construct query based on method name.
+* Method naming convention is very important for `findByXXX()` methods.
+* Using `findByXXX()` methods we can perform select operations only (retrieval). INSERT / UPDATE / DELETE operations we can't do using findBy methods.
+* Note: In findByXXX() method syntax we will use entity variable names.
+* Code Example:
+    * Entity Class
+        ```java
+        @Entity
+        @Table(name = "STUDENT")
+        public class Student {
+            @Id
+            private Integer id;
+            private String name;
+            @Column(name = "student_rank")
+            private Long rank;
+            private String gender;
+        }
+        ```
+    * Repository Interface
+        ```java
+        public interface StudentRepository extends CrudRepository<Student, Integer> {
+            List<Student> findByGender(String gender);
+            List<Student> findByGenderIsNull();
+            List<Student> findByRankGreaterThanEqual(int rank);
+            List<Student> findByRankLessThanEqual(int rank);
+            List<Student> findByGenderAndRankGreaterThanEqual(String gender, int rank);
+        }
+        ```
