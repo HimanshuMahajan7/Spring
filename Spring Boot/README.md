@@ -259,3 +259,9 @@ public class Application {
     * Example: `select name, rank, gender from student;`
 
 * `Note`: We can combine selection and projection in a single query.
+
+
+#### `JpaRepository`
+* It is predefined interface provided by Spring Data JPA
+* JpaRepository provided several methods to perform CRUD operations with database.
+* JpaRepository
