@@ -262,6 +262,10 @@ public class Application {
 
 
 #### `JpaRepository`
-* It is predefined interface provided by Spring Data JPA
+* It is a predefined interface provided by Spring Data JPA
 * JpaRepository provided several methods to perform CRUD operations with database.
-* JpaRepository
+* JpaRepository provided few additional methods to perform operations.
+    * JpaRepository = CrudRepository + PagingAndSorting + QueryByExample
+
+##### Pagination
+* Displaying table records in multiple pages is called as Pagination.
