@@ -1,10 +1,15 @@
 package com.example;
 
 import com.example.entity.Student;
+import com.example.repository.StudentJpaRepository;
 import com.example.repository.StudentRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -123,6 +128,32 @@ public class Application {
 //		System.out.println("\n********** HQL, Get rank and gender **********");
 //		List<Student> rankAndGender = studentRepository.getRankAndGender();
 //		rankAndGender.forEach(System.out::println);
+
+		System.out.println("\n\n");
+
+		System.out.println("--------------------------------------------------");
+		System.out.println("JpaRepository");
+		System.out.println("\n********** Get all Students in JpaRepository **********");
+		StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+		List<Student> allStudentsWithJpaRepo = studentJpaRepository.findAll();
+		allStudentsWithJpaRepo.forEach(System.out::println);
+
+		System.out.println("\n********** Pagination using PageRequest in JpaRepository **********");
+		PageRequest pageRequest = PageRequest.of(0, 3);
+		Page<Student> findAll = studentJpaRepository.findAll(pageRequest);
+		List<Student> findAllContent = findAll.getContent();
+		findAllContent.forEach(System.out::println);
+
+		System.out.println("\n********** Sorting using Sort in JpaRepository **********");
+		List<Student> allStudentsSorted = studentJpaRepository.findAll(Sort.by("gender"));
+		allStudentsSorted.forEach(System.out::println);
+
+		System.out.println("\n********** Filtering using Example in JpaRepository **********");
+		Student studentExample = new Student();
+		studentExample.setGender("Male");
+		Example<Student> example = Example.of(studentExample);
+		List<Student> studentsByExample = studentJpaRepository.findAll(example);
+		studentsByExample.forEach(System.out::println);
 
 		System.out.println("\n\n");
 	}

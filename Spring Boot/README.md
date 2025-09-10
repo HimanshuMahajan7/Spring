@@ -266,6 +266,69 @@ public class Application {
 * JpaRepository provided several methods to perform CRUD operations with database.
 * JpaRepository provided few additional methods to perform operations.
     * JpaRepository = CrudRepository + PagingAndSorting + QueryByExample
+* Code Example:
+    ```java
+    public interface StudentJpaRepository extends JpaRepository<Student, Integer> {
+    }
+    ```
+    ```java
+    @SpringBootApplication
+    public class Application {
+        public static void main(String[] args) {
+            StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+            List<Student> allStudentsWithJpaRepo = studentJpaRepository.findAll();
+            allStudentsWithJpaRepo.forEach(System.out::println);
+        }
+    }
+    ```
 
 ##### Pagination
 * Displaying table records in multiple pages is called as Pagination.
+* Code Example:
+    ```java
+    @SpringBootApplication
+    public class Application {
+        public static void main(String[] args) {
+            StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+            
+            PageRequest pageRequest = PageRequest.of(0, 3);
+            Page<Student> findAll = studentJpaRepository.findAll(pageRequest);
+            List<Student> findAllContent = findAll.getContent();
+            findAllContent.forEach(System.out::println);
+        }
+    }
+    ```
+
+##### Sorting
+* Sorting based on a filed
+* Code Example:
+    ```java
+    @SpringBootApplication
+    public class Application {
+        public static void main(String[] args) {
+            StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+            
+            List<Student> allStudentsSorted = studentJpaRepository.findAll(Sort.by("gender"));
+		    allStudentsSorted.forEach(System.out::println);
+        }
+    }
+    ```
+
+#### `QueryByExample`
+* QueryByExample is used to construct select query dynamically based on given entity object data.
+* QueryByExample is used with AND operation
+* Code Example:
+    ```java
+    @SpringBootApplication
+    public class Application {
+        public static void main(String[] args) {
+            StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+            
+            Student studentExample = new Student();
+            studentExample.setGender("Male");
+            Example<Student> example = Example.of(studentExample);
+            List<Student> studentsByExample = studentJpaRepository.findAll(example);
+            studentsByExample.forEach(System.out::println);
+        }
+    }
+    ```
