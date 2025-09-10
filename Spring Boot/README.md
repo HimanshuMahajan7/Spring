@@ -314,7 +314,7 @@ public class Application {
     }
     ```
 
-#### `QueryByExample`
+##### `QueryByExample`
 * QueryByExample is used to construct select query dynamically based on given entity object data.
 * QueryByExample is used with AND operation
 * Code Example:
@@ -330,5 +330,40 @@ public class Application {
             List<Student> studentsByExample = studentJpaRepository.findAll(example);
             studentsByExample.forEach(System.out::println);
         }
+    }
+    ```
+
+#### DML Operations: Non Select Operation
+* Insert, Update and Delete are non-select operation
+* If we want to perform Non-Select Operation using Data JPA custom query then we should use below 2 annotations at our method.
+    1. `@Modifying`
+    2. `@Transactional`
+* Note: The above annotations are not required for select operations
+* Code Example:
+    ```java
+    public interface StudentJpaRepository extends JpaRepository<Student, Integer> {
+    
+        @Modifying
+        @Transactional
+        @Query("delete from Student where id = :studentId")
+        void deleteStudent(Integer studentId);
+    
+        @Modifying
+        @Transactional
+        @Query("update Student set gender = :gender where id = :studentId")
+        void updateStudent(Integer studentId, String gender);
+    
+        /* Inserting using HQL is not possible in Data JPA */
+        /*
+        @Modifying
+        @Transactional
+        @Query("insert into Student(id, name, gender, student_rank) values(:id, :name, :gender, :rank)")
+        void insertStudent(Integer id, String name, String gender, Long rank);
+        */
+    
+        @Modifying
+        @Transactional
+        @Query(value = "INSERT INTO STUDENT(id, name, gender, student_rank) values(:id, :name, :gender, :rank);", nativeQuery = true)
+        void insertStudent(Integer id, String name, String gender, Long rank);
     }
     ```

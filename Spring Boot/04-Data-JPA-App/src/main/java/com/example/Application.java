@@ -22,6 +22,9 @@ public class Application {
 		StudentRepository studentRepository = context.getBean(StudentRepository.class);
 		System.out.println(studentRepository.getClass().getName());
 
+		StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
+		System.out.println(studentJpaRepository.getClass().getName());
+
 		Student student1 = new Student(101, "Himanshu", 100L, "Male");
 		Student student2 = new Student(102, "Gayatri", 101L, "Female");
 		Student student3 = new Student(103, "Himanshu Mahajan", 80L, "Male");
@@ -134,7 +137,6 @@ public class Application {
 		System.out.println("--------------------------------------------------");
 		System.out.println("JpaRepository");
 		System.out.println("\n********** Get all Students in JpaRepository **********");
-		StudentJpaRepository studentJpaRepository = context.getBean(StudentJpaRepository.class);
 		List<Student> allStudentsWithJpaRepo = studentJpaRepository.findAll();
 		allStudentsWithJpaRepo.forEach(System.out::println);
 
@@ -154,6 +156,27 @@ public class Application {
 		Example<Student> example = Example.of(studentExample);
 		List<Student> studentsByExample = studentJpaRepository.findAll(example);
 		studentsByExample.forEach(System.out::println);
+
+		System.out.println("\n\n");
+
+		System.out.println("--------------------------------------------------");
+		System.out.println("DML Operations - Non Select Operations");
+		System.out.println("\n********** Delete Student using custom query **********");
+		studentJpaRepository.deleteStudent(104);
+		System.out.println("Student deleted !!!");
+		studentJpaRepository.deleteStudent(10001);
+		System.out.println("Student deleted !!!");
+
+		System.out.println("\n********** Update Student using custom query **********");
+		studentJpaRepository.updateStudent(101, "M");
+		System.out.println("Student Updated !!!");
+
+		System.out.println("\n********** Insert Student using custom query **********");
+		System.out.println("Inserting using HQL is not possible in Data JPA");
+
+		System.out.println("\n********** Insert Student using native custom query **********");
+		studentJpaRepository.insertStudent(111, "Him", "M", 100L);
+		System.out.println("Student Inserted !!!");
 
 		System.out.println("\n\n");
 	}
