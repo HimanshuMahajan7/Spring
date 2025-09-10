@@ -367,3 +367,22 @@ public class Application {
         void insertStudent(Integer id, String name, String gender, Long rank);
     }
     ```
+
+#### Timestamps in Data JPA
+* `@CreationTimestamp`:
+    * It is used to populate record's inserted date into DB column.
+* `@UpdateTimestamp`:
+    * It is used to populate record's updated date into DB column.
+* Code Example:
+    ```java
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    @Column(insertable = false)
+    private LocalDateTime updatedDate;
+    ```
+* Note: 
+    * `LocalDate` represents date value.
+    * `LocalDateTime` class represents Date with Time value.

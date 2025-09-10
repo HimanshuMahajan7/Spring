@@ -4,6 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "STUDENT")
@@ -16,6 +21,14 @@ public class Student {
     @Column(name = "student_rank")
     private Long rank;
     private String gender;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    @Column(insertable = false)
+    private LocalDateTime updatedDate;
 
     public Student() { }
 
@@ -60,6 +73,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student[" + "id=" + id + ", name='" + name + ", rank=" + rank + ", gender='" + gender + "]";
+        return "Student[" + "id=" + id + ", name='" + name + ", rank=" + rank + ", gender='" + gender + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ']';
     }
 }
