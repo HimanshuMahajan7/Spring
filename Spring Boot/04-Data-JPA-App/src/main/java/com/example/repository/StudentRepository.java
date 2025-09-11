@@ -1,6 +1,8 @@
 package com.example.repository;
 
+import com.example.entity.NameGenderView;
 import com.example.entity.Student;
+import com.example.entity.StudentDTO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -43,6 +45,14 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     List<Student> getStudentsWhereGenderIsAndRankGreaterThan(String gender, int rank);
 
     /* SQL */
-    // @Query(value = "select name, gender from student", nativeQuery = true)
-    // List<Student> getRankAndGender();
+    @Query(value = "select name, gender from student", nativeQuery = true)
+    List<Object[]> getRankAndGender();
+
+    /* HQL */
+    @Query(value = "select new com.example.entity.StudentDTO(s.name, s.gender) from Student s")
+    List<StudentDTO> getRankAndGenderDTOProjection();
+
+    /* SQL */
+    @Query(value = "select name, gender from student", nativeQuery = true)
+    List<NameGenderView> getRankAndGenderInterfaceBasedProjection();
 }

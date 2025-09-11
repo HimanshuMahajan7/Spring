@@ -1,6 +1,8 @@
 package com.example;
 
+import com.example.entity.NameGenderView;
 import com.example.entity.Student;
+import com.example.entity.StudentDTO;
 import com.example.repository.StudentJpaRepository;
 import com.example.repository.StudentRepository;
 import org.springframework.boot.SpringApplication;
@@ -128,9 +130,23 @@ public class Application {
 		List<Student> studentsWhereGenderIsAndRankGreaterThan = studentRepository.getStudentsWhereGenderIsAndRankGreaterThan("Female", 100);
 		studentsWhereGenderIsAndRankGreaterThan.forEach(System.out::println);
 
-//		System.out.println("\n********** HQL, Get rank and gender **********");
-//		List<Student> rankAndGender = studentRepository.getRankAndGender();
-//		rankAndGender.forEach(System.out::println);
+		System.out.println("\n********** HQL, Get rank and gender with Object[] projection **********");
+		List<Object[]> rankAndGender = studentRepository.getRankAndGender();
+		rankAndGender.forEach(res -> {
+			System.out.println(res[0] + ", " + res[1]);
+		});
+
+		System.out.println("\n********** HQL, Get rank and gender with DTO Projection **********");
+		List<StudentDTO> rankAndGenderDTOProjection = studentRepository.getRankAndGenderDTOProjection();
+		rankAndGenderDTOProjection.forEach(dto -> {
+			System.out.println(dto.getName() + " - " + dto.getGender());
+		});
+
+		System.out.println("\n********** HQL, Get rank and gender with Interface Based Projection **********");
+		List<NameGenderView> rankAndGenderInterfaceBasedProjection = studentRepository.getRankAndGenderInterfaceBasedProjection();
+		rankAndGenderInterfaceBasedProjection.forEach(dto -> {
+			System.out.println(dto.getName() + " - " + dto.getGender());
+		});
 
 		System.out.println("\n\n");
 
