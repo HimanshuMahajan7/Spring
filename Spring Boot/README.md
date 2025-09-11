@@ -386,3 +386,15 @@ public class Application {
 * Note: 
     * `LocalDate` represents date value.
     * `LocalDateTime` class represents Date with Time value.
+
+#### Soft Delete and Hard Delete
+* **Hard Delete** 
+    * Means deleting the record from DB permanently using **delete** query.
+    * Once we perform Hard Delete we can not get back the data from the DB.
+* **Soft Delete** 
+    * Means updating the record as IN-ACTIVE.
+    * Soft Deleted records will be present/available in DB so we can access whenever we want.
+    * Example: Activate / Deactivate
+* NOTE: We can implement SOFT DELETE using additional column in DB.
+    * Status: 1
+    * Status: 0
