@@ -390,7 +390,7 @@ public class Application {
 #### Soft Delete and Hard Delete
 * **Hard Delete** 
     * Means deleting the record from DB permanently using **delete** query.
-    * Once we perform Hard Delete we can not get back the data from the DB.
+    * Once we perform Hard Delete, we cannot get back the data from the DB.
 * **Soft Delete** 
     * Means updating the record as IN-ACTIVE.
     * Soft Deleted records will be present/available in DB so we can access whenever we want.
@@ -398,3 +398,115 @@ public class Application {
 * NOTE: We can implement SOFT DELETE using additional column in DB.
     * Status: 1
     * Status: 0
+
+#### Primary Key & Composite Primary Key
+* The Primary key is constraint to maintain unique records in the table
+    * Primary Key = UNIQUE + NOT NULL
+* If we try to insert duplicate value in PK Column, then we will get UniqueConstraintException.
+* We shouldn't ask end users to enter value for PK column because users may enter duplicate value.
+* To generate value for PK column, we will use the Generator concept.
+* `@Id` annotation is used to mark a filed as primary key.
+* `@GeneratedValue` annotation is used to generate values for PK.
+* `GenerationType` strategy is used to different type of PK values.
+* Code Example:
+    ```java
+    @Entity
+    public class Product {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer productId;
+        private String productName;
+        private Double productPrice;
+    }
+    ```
+
+#### Sequence Generator
+* `@GeneratedValue`
+* `@GeneratedValue(strategy = GenerationType.IDENTITY)`
+* Below `GenerationType` strategies are present in Data JPA
+    * AUTO
+    * SEQUENCE
+    * TABLE
+    * IDENTITY
+* Each Database supports different `GenerationType` strategies:
+    * MYSQL DB
+        * `AUTO/SEQUENCE/TABLE`: New table will be created to maintain primary column values
+        * `IDENTITY`: Will use AUTO_INCREMENT to generate value for Primary Key
+        * MySQL DB will not support Sequences.
+    * ORACLE DB
+        * `AUTO`: Sequence to generate primary key value (default sequence name: hibernate_sequence)
+        * `SEQUENCE`: We can configure our own sequence to generate PK value like below
+            ```sql
+            create sequence pid_seq;
+            start with 1000;
+            increment by 1;
+            ```
+        * `TABLE`: New table will be created to maintain primary column values.
+        * NOTE: Oracle DB will not support for AUTO_INCREMENT
+        * Configuring Custom Sequence To Generate PK Value
+            * First, we need to create a sequence in DB like below
+                ```sql
+                create sequence pid_seq;
+                start with 1000;
+                increment by 1;
+                ```
+            * Configure Custom Sequence in Entity class like below
+                ```java
+                @Id
+                @SequenceGenerator(name="pid", sequenceName="pid_seq")
+                @GeneratedValue(strategy="GenerationType.SEQUENCE", generator="pid")
+                private Integer productId;
+                ```
+
+#### Custom Generator
+
+#### Composite Primary Key
+* If a table contains more than one PK column, then it is called as Composite Primary Key.
+* When we have Composite PK, then the combination PK column's data should not repeat in the table.
+* NOTE: We cannot use generator to generate value for Composite Primary Key
+* Code Example:
+    ```java
+    @Embeddable
+    public class AccountPK {
+        private Integer accId;
+        private String accType;
+        private Long accNum;
+    }
+    ```
+    ```java
+    @Entity
+    public class Account {
+        private String holderName;
+        private String branch;
+
+        @EmbeddedId
+        private AccountPK accountPK;
+    }
+    ```
+    ```java
+    public interface AccountRepository extends JpaRepository<Account, AccountPK> {
+    }
+    ```
+    ```java
+    @SpringBootApplication
+    public class Application3 {
+        public static void main(String[] args) {
+            ConfigurableApplicationContext context = SpringApplication.run(Application3.class);
+            AccountRepository accountRepository = context.getBean(AccountRepository.class);
+
+            AccountPK accountPK = new AccountPK();
+            accountPK.setAccId(1);
+            accountPK.setAccNum(1000L);
+            accountPK.setAccType("Current");
+
+            Account account = new Account();
+            account.setAccountPK(accountPK);
+            account.setHolderName("Himanshu");
+            account.setBranch("Indore");
+            accountRepository.save(account);
+
+            Optional<Account> accountDetails = accountRepository.findById(accountPK);
+            System.out.println(accountDetails.get());
+        }
+    }
+    ```
