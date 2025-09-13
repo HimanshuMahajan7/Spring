@@ -510,3 +510,11 @@ public class Application {
         }
     }
     ```
+
+#### Connection Pooling in Data JPA
+* **Connection Pooling** is used to maintain connections required for our application.
+* Getting connection from the DB directly is not recommended because it will degrade our application.
+* We need to create a connection pool to store connections when our application starts.
+* To perform DB operations, we need to get the connection from **Connection Pool** instead of getting from the DB.
+* Using **Connection Pool**, we can improve the performance of the application.
+* NOTE: Spring Data JPA will use Hikari Connection Pool by default.
