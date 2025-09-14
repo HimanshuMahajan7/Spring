@@ -518,3 +518,24 @@ public class Application {
 * To perform DB operations, we need to get the connection from **Connection Pool** instead of getting from the DB.
 * Using **Connection Pool**, we can improve the performance of the application.
 * NOTE: Spring Data JPA will use Hikari Connection Pool by default.
+
+
+#### Stored Procedures
+* Procedures means set of sql queries.
+* Procedures are used to write business logic at database side.
+* Procedures are used to improve performance of the application.
+* Code Example:
+    ```sql
+    DELIMITER $$
+    CREATE PROCEDURE getProducts()
+    BEGIN
+        SELECT * FROM product;
+    END$$
+    DELIMITER ;
+    ```
+    ```java
+    public interface ProductRepository extends JpaRepository<Product, Integer> {
+        @Query(value = "CALL getProducts();", nativeQuery = true)
+        public List<Product> getAllProducts();
+    }
+    ```
