@@ -539,3 +539,22 @@ public class Application {
         public List<Product> getAllProducts();
     }
     ```
+
+
+### Association Mapping / Relationships in DB tables
+* NOTE: To establish relationship between table we will use Foreign Key.
+* We can divide DB side relations in four types:
+    1. One To One
+    2. One To Many
+    3. Many To One
+    4. Many To Many
+* When DB tables are having relation then we need to represent that relation in our Entity classes also.
+* The process of representing DB tables relation in Entity classes is called as association mapping.
+* Cascade Type: Default type is NONE
+    * It represents operations on parent record should reflect on child record or not.
+    * Example: When we delete parent record then we want to delete all Child records of that Parent.
+* Fetch Type: Default Type is LAZY
+    * It represent weather to load child records along with Parent or not.
+    * Example: When we retrieve Parent record, I want to retrieve all child records of that Parent.
+
+#### One To Many Mapping
