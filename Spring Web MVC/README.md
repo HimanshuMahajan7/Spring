@@ -33,3 +33,30 @@
 4. Create a Presentation file.
 5. Configure View Resolver in application.properties file.
 6. Run the application and test.
+
+
+### Query Parameters
+* Query Parameters are also called as Request Parameters.
+* Query Parameters are used to send the data from Client to Server in URL.
+* Query Parameters represents the data in the form of key value pairs.
+* Query Parameters should present only at the end of the URL.
+* Query Parameters will start with '?' symbol.
+* Query Parameters will be separated by '&' symbol.
+* Example:
+    * www.youtube.com/watch?v=ajdnjf
+    * www.ashokit.in?course=sbms&trainer=ashok
+* To read the Query Parameters in Spring Controller we will use `@RequestParam` annotation.
+
+### Path Parameters
+* Path parameters are also called as URI parameters.
+* Path Parameters are used to send the data from Client to Server in URL.
+* Path parameters will represent the data directly without key value.
+* Example:
+    * www.ashokit.in/course/{cname}/trainer/{tname}
+* Path Parameters can present anywhere in the URL.
+* To read the Path Parameters in Spring Controller we will use `@PathVariable` annotation.
+
+
+### Form Development
+* Forms are essential part in web application.
+* Forms are used to collect data from user to perform business operations
