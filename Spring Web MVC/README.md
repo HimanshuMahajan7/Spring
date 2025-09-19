@@ -58,5 +58,18 @@
 
 
 ### Form Development
-* Forms are essential part in web application.
-* Forms are used to collect data from user to perform business operations
+* Forms are an essential part in web application.
+* Forms are used to collect data from users to perform business operations
+
+### Form Tag Library
+* Spring Web MVC module provided a Form Tag library to simplify form development.
+* Available Tags:
+    * \<form:form/>
+    * \<form:input/>
+    * \<form:password/>
+    * \<form:radiobutton/>
+    * \<form:select/>
+    * \<form:checkbox/>
+
+* To use a web mvc form tag library, we have to use below directive:
+    * `<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>`
