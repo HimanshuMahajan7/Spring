@@ -97,3 +97,25 @@
 4. Add below thymeleaf template in html file:
    * `<html xmlns:th="http://www.thymeleaf.org" lang="en">`
 5. Run the application and test it.
+
+### How to configure Jetty as Embedded Server?
+* Exclude default embedded tomcat dependency and add jetty starter dependency.
+* Code Example:
+    ```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    ```
+    ```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+    ```
