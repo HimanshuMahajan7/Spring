@@ -50,4 +50,11 @@ public class StudentController {
 		model.addAttribute("timings", timings);
 		model.addAttribute("student", student);
 	}
+	
+	@GetMapping("/viewStudents")
+	public String getStudentsData(Model model) {
+		List<StudentEntity> students = repo.findAll();
+		model.addAttribute("students", students);
+		return "data";
+	}
 }
