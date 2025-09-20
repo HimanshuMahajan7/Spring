@@ -16,14 +16,17 @@
 		<tr>
 			<td>Product Id</td>
 			<td><input type="text" th:field="*{pId}" placeholder="Product Id" /></td>
+            <td th:if="${#fields.hasErrors('pId')}" th:errors="*{pId}"></td>
 		</tr>
 		<tr>
 			<td>Product Name</td>
 			<td><input type="text" th:field="*{pName}" placeholder="Product Name" /></td>
+            <td th:if="${#fields.hasErrors('pName')}" th:errors="*{pName}"></td>
 		</tr>
 		<tr>
 			<td>Product Price</td>
 			<td><input type="text" th:field="*{price}" placeholder="Product Price" /></td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></td>
 		</tr>
 		<tr>
 			<td></td>

@@ -1,10 +1,18 @@
 package com.example.binding;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Product {
 
+	@NotNull(message = "Id is required!")
 	private Integer pId;
+	
+	@NotBlank(message = "Name is required!")
 	private String pName;
-	private String price;
+	
+	@NotNull(message = "Price is required!")
+	private Double price;
 
 	public Integer getpId() {
 		return pId;
@@ -22,11 +30,11 @@ public class Product {
 		this.pName = pName;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
