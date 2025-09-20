@@ -71,5 +71,29 @@
     * \<form:select/>
     * \<form:checkbox/>
 
-* To use a web mvc form tag library, we have to use below directive:
+* To use a web mvc form tag library, we have to use the below directive:
     * `<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>`
+
+
+### Thymeleaf
+* Thymeleaf we can use as a presentation technology in Spring Web MVC based application. 
+* Thymeleaf is an alternate of JSP.
+* JSP files can't be executed in the browser directly, JSP page should be converted into Servlet for execution.
+* Thymeleaf is a template engine that can be used in HTML pages directly.
+* HTML page will be executed in browser directly.
+    * HTML + Thymeleaf = Dynamic Web Pages
+* Performance wise Thymeleaf pages are much faster than JSP pages.
+* Thymeleaf introduced to overcome the problem of JSP.
+* To use Thymeleaf in boot applications, we need to add below starter:
+    * `spring-boot-starter-thymeleaf`
+
+#### Application Development with Thymeleaf
+1. Create boot app with the below dependencies:
+   * web-starter
+   * thymeleaf-starter
+   * devtools
+2. Create Spring Controllers with required methods.
+3. Create Thymeleaf templates under `src/main/resources/templates` folder (file extension is `.html`).
+4. Add below thymeleaf template in html file:
+   * `<html xmlns:th="http://www.thymeleaf.org" lang="en">`
+5. Run the application and test it.
