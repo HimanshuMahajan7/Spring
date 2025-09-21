@@ -119,3 +119,14 @@
         <artifactId>spring-boot-starter-jetty</artifactId>
     </dependency>
     ```
+
+
+### What is Interceptor in Spring Web MVC?
+* We can use Interceptor to perform pre-processing nad post-processing of every request.
+    * Pre-Processing: Before Request Processing by Controller method.
+    * Post-Processing: After Request processed by the Controller method.
+* Using Interceptor, we can trap each and evry request.
+* Use case for Interceptor:
+    * Calculate each request processing time
+    * Log Request & Response Details
+    * Request Authentication
