@@ -130,3 +130,18 @@
     * Calculate each request processing time
     * Log Request & Response Details
     * Request Authentication
+
+
+### Exception Handling in Spring Web MVC
+* Exception means unexpected and unwanted situation.
+* Exception disturbs the normal flow of our application execution.
+* When exception occurs, then our program will terminate abnormally.
+* As a developer, we should handle exception to achieve graceful termination of our application.
+* To handle exceptions, Java provided below keywords:
+    1. try
+    2. catch
+    3. throw
+    4. throws
+    5. finally
+* To handle exception in Spring Web MVC application, we need to create a method and use the below annotation:
+    * @ExceptionHandler
