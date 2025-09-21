@@ -5,3 +5,4 @@
 2. @GetMapping
 3. @RequestParam
 4. @PathVariable
+5. @ResponseBody
