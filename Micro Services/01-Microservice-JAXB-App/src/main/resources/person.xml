@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<person>
+    <address>
+        <city>Pithampur</city>
+        <country>India</country>
+        <state>Dhar</state>
+    </address>
+    <email>himanshu@emial.in</email>
+    <gender>Male</gender>
+    <id>101</id>
+    <name>Himanshu</name>
+</person>
