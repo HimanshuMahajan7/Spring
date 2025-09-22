@@ -117,3 +117,52 @@
     Passenger passenger = gson.fromJson(new FileReader("./src/main/resources/passenger.json"), Passenger.class);
     System.out.println(passenger);
     ```
+
+---
+
+### HTTP Protocol
+* Hypertext Transfer Protocol
+* HTTP acts as a mediator between Client and Server
+* HTTP Methods
+    * GET
+    * POST
+    * PUT
+    * DELETE
+* HTTP Status Codes
+
+#### HTTP Status Codes
+* The Server will send HTTP Status code to client in the response.
+* HTTP Status Codes will indicate how the Server processed our request.
+* Status COdes:
+    * 1XX: Informational Status Code
+    * 2XX: Success Status (OK)
+    * 3XX: Redirectional
+    * 4XX: Client Error
+    * 5XX: Server Error
+
+#### HTTP Request Packet
+1. Request Line
+    * HTTP Method + Request URL
+    * Example: `GET: www.irctc.com/ticket/1234`
+2. Request Header
+    * Meta Data of Request
+    * Example:
+        * `Content-Type=application/json`
+        * `Accept=application/json`
+3. Request Body
+    * Payload
+    * Example: XML or JSON Data
+
+#### HTTP Response Packet
+1. Response Line
+    * HTTP Status Code + Status Message
+    * Example: 200 OK
+2. Response Header
+    * Meta Data
+    * Example:
+        * `Content-Type: application/json`
+        * `Content-Length: 100`
+        * `Date: mm/dd/yyyy`
+3. Response Body
+    * Payload
+    * Example: XML or JSON Data
