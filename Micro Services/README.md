@@ -64,3 +64,35 @@
 * Using above APIs we can convert Java Object to JSON and JSON to Java Object.
     * Serialization: Convert Java Object to JSON
     * De-Serialization: Convert JSON data to Java Object
+
+#### Jackson API
+* Dependency:
+    ```xml
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+    </dependency>
+    ```
+* Marshalling:
+    ```java
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    try {
+        objectMapper.writeValue(new File("./src/main/resources/passenger.json"), passenger);
+        String passengerJson = objectMapper.writeValueAsString(passenger);
+        System.out.println(passenger);
+        System.out.println(passengerJson);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+    ```
+* Un-marshalling
+    ```java
+    ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Passenger passenger = objectMapper.readValue(new File("./src/main/resources/passenger.json"), Passenger.class);
+            System.out.println(passenger);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    ```

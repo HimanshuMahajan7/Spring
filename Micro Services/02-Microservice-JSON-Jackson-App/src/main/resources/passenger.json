@@ -1,0 +1,11 @@
+{
+  "name" : "Himanshu",
+  "from" : "Bangalore",
+  "to" : "Indore",
+  "gender" : "Male",
+  "address" : {
+    "city" : "Indore",
+    "state" : "Madhya Pradesh",
+    "country" : "India"
+  }
+}
