@@ -96,3 +96,24 @@
             throw new RuntimeException(e);
         }
     ```
+
+#### Gson API
+* Dependency:
+    ```xml
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+    </dependency>
+    ```
+* Serialization:
+    ```java
+    // Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    String passengerJson = gson.toJson(passenger);
+    ```
+* De-serialization:
+    ```java
+    Gson gson = new Gson();
+    Passenger passenger = gson.fromJson(new FileReader("./src/main/resources/passenger.json"), Passenger.class);
+    System.out.println(passenger);
+    ```
