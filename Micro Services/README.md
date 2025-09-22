@@ -47,3 +47,20 @@
     * To use JDK in our project, which is using java 1.9 or above version, should have jax-b dependency
 
 ---
+
+### JSON
+* JSON stands for Java Script Object Notation.
+* JSON represents data in key-value format.
+* JSON is lightweight.
+* JSON is interoperable (Platform & Language Independent)
+* We can use JSON structure to exchange data from one application to another application.
+* NOTE: When compared to XML, JSON will take less memory
+* To work with JSON, java directly does not have API, we have to use below third party APIs:
+    1. Jackson (It is default in Spring Boot)
+    2. Gson (Given by Google)
+    3. JSON-B (Jakarta EE standard)
+    4. Moshi (by Square, modern & safe)
+    5. Fastjson2 (by Alibaba, very fast)
+* Using above APIs we can convert Java Object to JSON and JSON to Java Object.
+    * Serialization: Convert Java Object to JSON
+    * De-Serialization: Convert JSON data to Java Object
