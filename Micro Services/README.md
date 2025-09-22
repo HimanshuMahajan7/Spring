@@ -166,3 +166,18 @@
 3. Response Body
     * Payload
     * Example: XML or JSON Data
+
+---
+
+### REST API Development
+* It is very simple to develop REST API using Spring Boot.
+* Spring Boot provided `web-starter` to develop both web and distributed applications.
+* `web-starter` will provide Tomcat as default embedded server.
+
+#### Steps to develop REST Application
+1. Create Spring-Starter Project with below dependency
+    * `spring-boot-starter-web`
+2. Create REST Controller class using `@RestController` annotation to handle request & response.
+3. Write the required methods & bind them to HTTP Protocol 
+4. Run the boot application
+5. Test our REST Application using Postman tool.
