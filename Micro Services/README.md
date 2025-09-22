@@ -181,3 +181,11 @@
 3. Write the required methods & bind them to HTTP Protocol 
 4. Run the boot application
 5. Test our REST Application using Postman tool.
+
+---
+
+### Media Types
+* consumes: It represents in which format REST API can take input.
+* produces: It represents in which format REST API can provide output.
+* Content-Type: It represents in which format a client sending data to REST API.
+* Accept: It represents in which format a client expecting response from REST API.

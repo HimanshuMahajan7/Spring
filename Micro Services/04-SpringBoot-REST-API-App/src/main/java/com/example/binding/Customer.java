@@ -1,5 +1,8 @@
 package com.example.binding;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Customer {
 
 	private String name;
