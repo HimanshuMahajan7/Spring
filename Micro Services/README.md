@@ -16,3 +16,34 @@
     * Python <---> .Net
     * .Net <---> PHP
 * By using RESTFul services, we can develop Interoperable applications.
+
+---
+
+### XML
+* XML stands for Extensible Markup Language
+* XML Governed by w3c org
+* XML is platform independent and language independent
+* XML is used to exchange data between application
+* XML represent data in tags format
+     * `<id>101</id>`
+     * `<name>Himanshu</name>`
+* In XML wa can use two types of tags:
+	1. Simple Element
+    2. Compound Element
+* **Simple Element**: The element which represents the data directly is called a Simple Element.
+* **Compound Element**: The element which represents child element is called a Compound Element.
+
+
+#### JAX-B API
+* JAX-B stands for Java Architecture for XML binding.
+* Using JAX-B API we can convert xml data to java object and java object to xml object.
+    * Marshalling: Convert a Java object to XML data
+    * Un-Marshalling: Convert XML to a Java object
+* To perform Marshalling and Un-marshalling, we need to create Binding Classes.
+* Binding class means the class which represents XML structure.
+* NOTE:
+    * Up to JDK 1.8 JAX-B was part of JDK Software
+    * From JDK 1.9 version JAX-B removed from JDK
+    * To use JDK in our project, which is using java 1.9 or above version, should have jax-b dependency
+
+---
