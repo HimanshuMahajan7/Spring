@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.binding.Passenger;
 import com.example.binding.Ticket;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,6 +15,8 @@ public class ERailRestController {
 
     Map<UUID, Ticket> ticketMap = new HashMap<>();
 
+    @Operation(summary = "Book Ticket", description = "Book a Train Ticket")
+    @ApiResponse(responseCode = "200", description = "Ticket Booked")
     @PostMapping(
         value = "/ticket",
         consumes = {"application/json", "application/xml"},

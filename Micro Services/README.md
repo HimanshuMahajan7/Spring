@@ -189,3 +189,48 @@
 * produces: It represents in which format REST API can provide output.
 * Content-Type: It represents in which format a client sending data to REST API.
 * Accept: It represents in which format a client expecting response from REST API.
+
+---
+
+### Swagger
+* Need:
+    * In distributed applications two actors will be available
+        1. Provider
+        2. Consumer
+    * Provider will be developed by one company.
+    * Consumer will be developed by another company.
+    * If consumer/client wants to access provider, consumer side dev team should know provider information, like:
+        * What is provider API URL?
+        * What operations (methods) provider having?
+        * Operations are bind to which request type (GET, POST, PUT or DELETE)?
+        * What input provider expecting from consumer?
+        * What output provider will give to consumer?
+        * Which data from provider will support for input and output?
+    * NOTE: If consumer/client side dev team having all the above information then only they can start consumer side development.
+    * NOTE: Provider side dev team should provide API documentation to consumer side dev team.
+* Swagger
+    * Swagger is used to generate API documentation.
+    * Swagger is a third party library which is used to generate REST API documentation.
+    * Integrate Swagger in our App:
+        * Dependency:
+            ```xml
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>2.6.0</version>
+            </dependency>
+            ```
+        * Config (Optional):
+            ```java
+            @Configuration
+            public class SwaggerConfig {
+                @Bean
+                public OpenAPI apiInfo() {
+                    Info info = new Info();
+                    info.title("ERail Service API")
+                            .version("v1")
+                            .description("REST API documentation for ERail Service");
+                    return new OpenAPI().info(info);
+                }
+            }
+            ```
