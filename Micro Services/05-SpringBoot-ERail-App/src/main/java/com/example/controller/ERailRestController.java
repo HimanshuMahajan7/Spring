@@ -35,6 +35,8 @@ public class ERailRestController {
         ticket.setTicketStatus("Booked");
 
         ticketMap.put(ticket.getTicketId(), ticket);
+        System.out.println("Tickets:" + ticketMap);
+        ticketMap.entrySet().forEach(System.out::println);
         return ticket;
     }
 
@@ -44,6 +46,7 @@ public class ERailRestController {
     )
     public Ticket getTicket(@PathVariable String ticketNumber) {
         UUID ticketId = UUID.fromString(ticketNumber);
+        ticketMap.entrySet().forEach(System.out::println);
         return ticketMap.get(ticketId);
     }
 }

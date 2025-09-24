@@ -24,7 +24,7 @@ public class MakeMyTripController {
     @PostMapping("/bookTicket")
     public String bookTicket(Passenger passenger, Model model) {
         System.out.println(passenger);
-        Ticket ticket = makeMyTripService.bookTicket(passenger);
+        Ticket ticket = makeMyTripService.bookTicketWithWebClient(passenger);
         model.addAttribute("ticket", ticket);
         return "success";
     }
@@ -37,7 +37,7 @@ public class MakeMyTripController {
     @GetMapping("searchTicket")
     public String searchTicket(@RequestParam("ticketId") String ticketId, Model model) {
         System.out.println("Ticket Id: " + ticketId);
-        Ticket ticket = makeMyTripService.getTicket(ticketId);
+        Ticket ticket = makeMyTripService.getTicketWithWebClient(ticketId);
         model.addAttribute("ticket", ticket);
         return "search";
     }
