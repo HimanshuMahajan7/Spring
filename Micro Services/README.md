@@ -253,3 +253,41 @@
 
 * RestTemplate (C)    : spring-boot-starter-web
 * WebClient (I)       : spring-boot-starter-webflux
+
+---
+
+### Spring Data REST
+* It is used to simplify REST API development.
+* We don't need to create REST Controllers to perform CRUD operations with DB table.
+* To use Data-REST in our project, we need to add below dependency in pom:
+	```xml
+ 	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-rest</artifactId>
+	</dependency>
+	```
+
+* Below will be the Repository to expose the REST endpoints:
+	```java
+	@Repository
+	@RepositoryRestResource(path = "books")
+	public interface BookRepo extends JpaRepository<Book, Integer> {
+		List<Book> findByNameContaining(String name);
+	}
+	```
+
+* Below will be the config to restrict the REST APi exposure:
+    ```java
+    @Configuration
+    public class MyDataRestConfig implements RepositoryRestConfigurer {
+        @Override
+        public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+            HttpMethod[] unsupportedMethods = { HttpMethod.PUT, HttpMethod.PUT };
+            config.getExposureConfiguration()
+                .forDomainType(Book.class)
+                .withItemExposure((metadata, http) -> http.disable(unsupportedMethods))
+                .withCollectionExposure((metadata, http) -> http.disable(unsupportedMethods));
+            RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
+        }
+    }
+    ```
