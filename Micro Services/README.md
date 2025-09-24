@@ -234,3 +234,12 @@
                 }
             }
             ```
+
+---
+
+### REST Client Development
+* The application which is accessing another application is called as REST client.
+* In Spring Boot we can develop REST Client in 3 ways:
+    1. RestTemplate class (Synchronous)
+    2. WebClient interface (Synchronous & Async) (introduced in spring 5.x version)
+    3. FeignClient interface (Spring Cloud)
