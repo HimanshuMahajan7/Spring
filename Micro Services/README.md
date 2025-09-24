@@ -243,3 +243,13 @@
     1. RestTemplate class (Synchronous)
     2. WebClient interface (Synchronous & Async) (introduced in spring 5.x version)
     3. FeignClient interface (Spring Cloud)
+
+#### WebClient
+* WebClient is a predefined interface introduced in Spring 5.x version
+* Using WebClient interface, we can develop REST client logics.
+* WebClient supports both sync and async communication.
+* Sync  : Blocking Thread (After sending request we have to wait for response)
+* Async : Non Blocking Thread (After sending request we no need to wait for response)
+
+* RestTemplate (C)    : spring-boot-starter-web
+* WebClient (I)       : spring-boot-starter-webflux
