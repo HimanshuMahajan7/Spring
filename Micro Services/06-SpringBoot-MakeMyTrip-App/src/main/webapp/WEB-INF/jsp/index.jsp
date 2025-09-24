@@ -35,5 +35,6 @@
         </tr>
     </table>
     </form>
+    <a href="/search">Search Ticket</a>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MakeMyTripController {
@@ -26,5 +27,18 @@ public class MakeMyTripController {
         Ticket ticket = makeMyTripService.bookTicket(passenger);
         model.addAttribute("ticket", ticket);
         return "success";
+    }
+
+    @GetMapping("search")
+    public String search() {
+        return "search";
+    }
+
+    @GetMapping("searchTicket")
+    public String searchTicket(@RequestParam("ticketId") String ticketId, Model model) {
+        System.out.println("Ticket Id: " + ticketId);
+        Ticket ticket = makeMyTripService.getTicket(ticketId);
+        model.addAttribute("ticket", ticket);
+        return "search";
     }
 }
