@@ -1,4 +1,4 @@
-package com.example.binding;
+package com.example.response;
 
 import lombok.Data;
 

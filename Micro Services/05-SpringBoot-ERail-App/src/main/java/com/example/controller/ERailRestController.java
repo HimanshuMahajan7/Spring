@@ -26,9 +26,11 @@ public class ERailRestController {
         UUID ticketNumber = UUID.randomUUID();
         Ticket ticket = new Ticket();
         ticket.setTicketId(ticketNumber);
+        ticket.setPassengerName(passenger.getName());
         ticket.setFrom("Bangalore");
         ticket.setTo("Indore");
-        ticket.setTrainNumber("1234");
+        ticket.setDoj(passenger.getDoj());
+        ticket.setTrainNumber("001234");
         ticket.setTicketCost("1500.00");
         ticket.setTicketStatus("Booked");
 
