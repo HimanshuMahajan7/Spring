@@ -357,3 +357,45 @@
 4. Map REST API endpoints to HTTP Methods
 5. MediaType Representation
 6. HATEOAS (Hypermedia As The Engine Of Application State)
+
+#### HATEOAS
+* It is one of the REST Architecture Principle.
+* It is used to send response along with hyperlinks for related data.
+* Code Snippet:
+    * Dependency
+        ```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+        ```
+    * Controller:
+        ```java
+        package com.example.controller;
+
+        import com.example.entity.User;
+        import org.springframework.hateoas.EntityModel;
+        import org.springframework.hateoas.Link;
+        import org.springframework.http.HttpStatus;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.web.bind.annotation.GetMapping;
+        import org.springframework.web.bind.annotation.RestController;
+
+        import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+        import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+        @RestController
+        public class UserRestController {
+
+            @GetMapping("/user")
+            public EntityModel<User> getUser() {
+                User user = User.builder().id(101).name("Himanshu").email("emailofhim@gmail.com").build();
+
+                return EntityModel.of(user,
+                        linkTo(methodOn(UserRestController.class).getUser()).withSelfRel(),
+                        linkTo(methodOn(UserRestController.class).getUser()).withRel("close"),
+                        linkTo(methodOn(UserRestController.class).getUser()).withRel("assign")
+                );
+            }
+        }
+        ```
