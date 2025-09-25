@@ -399,3 +399,39 @@
             }
         }
         ```
+
+---
+
+### Spring Boot Actuators
+* Actuator is one of the features available in Spring Boot.
+* Actuators are used for providing Production Ready Features for the application
+* By using Actuators, we can monitor and manage our application.
+* Actuators helps us identify:
+    * What is the health of our application?
+    * How many beans loaded by our application?
+    * What config props loaded by our application?
+    * What is Heap info of our application?
+    * How many threads running in our application?
+* To configure actuators in our application, spring boot provided below starter:
+    * `spring-boot-starter-actuator`
+* Once our application started, we can use below url to see actuator endpoints which are exposed:
+    * URL: http://localhost:9090/actuator
+* Note: By default `/health` endpoint exposed in actuators.
+* If we want to expose all actuator endpoints, then we will write the below property in the application.properties file:
+    * `management.endpoints.web.exposure.include=*`
+* Some useful endpoints details:
+    * /beans: It will give all the beans which are loaded by our application
+    * /mappings: It will give all the url-mappings available in our application
+    * /health: It will give health status of our application
+    * /configProps: It will give config properties loaded by our application
+    * /metrics: It will give metrics of our application
+    * /logger: It will give loggers configured in our application
+    * /threaddump: It will give all the threads info in our application
+    * /heapdump: It will download heap information in one file
+* We can exclude actuator endpoints using below configuration in application.properties file:
+    * `management.endpoints.web.exposure.exclude=beans,mappings`
+* In Actuator, we have a special endpoint called `/shutdown`
+    * This `/shutdown` endpoint is bind to HTTP `POST` request
+    * Using this endpoint, we can stop our application
+    * We have to enable and expose `/shutdown` endpoint in our configuration
+        * `management.endpoint.shutdown.enabled=true`
