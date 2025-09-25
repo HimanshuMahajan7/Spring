@@ -291,3 +291,57 @@
         }
     }
     ```
+
+---
+
+### Exception Handling
+* Exception means en-expected and unwanted situation.
+* Exception will cause abnormal termination of our program.
+* To achieve graceful termination, we need to handle exception in our application.
+* In Spring Boot, we can handle exception in two ways:
+    1. Local Exception Handling
+    2. Global Exception Handling
+
+#### Steps to implement Exception Handling
+1. Create Spring Boot Project with Web Starter
+2. Create REST controller with required methods
+3. Create User Defined Exception Class
+4. Create Exception Info binding class
+5. Create Rest Controller Advice to handle global exceptions in our application
+
+#### Code Snippets
+* Response Class
+    ```java
+    @Data
+    @Builder
+    public class ExceptionInfo {
+        private String code;
+        private String message;
+        private LocalDateTime timestamp;
+    }
+    ```
+* Custom Exception Class
+    ```java
+    public class CustomerNotFoundException extends RuntimeException {
+        public CustomerNotFoundException() {}
+        public CustomerNotFoundException(String message) {
+            super(message);
+        }
+    }
+    ```
+* Global Exception Handler
+    ```java
+    @RestControllerAdvice
+    public class GlobalExceptionHandler {
+        @ExceptionHandler(value = CustomerNotFoundException.class)
+        public ResponseEntity<ExceptionInfo> handleCustomerNotFound(CustomerNotFoundException ex) {
+            ExceptionInfo response = ExceptionInfo
+                    .builder()
+                    .code("HN11ZX")
+                    .message(ex.getMessage())
+                    .timestamp(LocalDateTime.now())
+                    .build();
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
+    ```
