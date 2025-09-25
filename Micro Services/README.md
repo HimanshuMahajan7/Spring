@@ -345,3 +345,15 @@
         }
     }
     ```
+
+---
+
+### REST Architecture Principles
+* REST: Representation State Transfer
+
+1. Client Server Architecture
+2. No State / Session Management
+3. Unique Addressability
+4. Map REST API endpoints to HTTP Methods
+5. MediaType Representation
+6. HATEOAS (Hypermedia As The Engine Of Application State)
