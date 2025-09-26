@@ -435,3 +435,50 @@
     * Using this endpoint, we can stop our application
     * We have to enable and expose `/shutdown` endpoint in our configuration
         * `management.endpoint.shutdown.enabled=true`
+
+---
+
+## Microservice
+
+### What is Monolith Architecture?
+* If we develop all the functionalities in single project, then it is called as Monolith Architecture based application.
+* We will package our application as a jar/war to deploy into server.
+* As monolith application contains all functionalities, it will become fat jar/war.
+
+#### Advantages
+1. Simple to Develop
+2. Everything is available at one place
+3. Configuration required only once
+
+#### Dis-advantages
+1. Difficult to maintain
+2. Dependencies among the functionalities
+3. Single Point of Failure
+4. Entire Project Re-Deployment
+
+### Microservice
+* To overcome the problem of Monolithic architecture, Microservices architecture came into market
+* Microservice is not a:
+    * Programming Language
+    * Framework
+    * API
+* Microservice is an architectural design pattern
+* Microservice suggesting to develop application functionalities with loose coupling
+* In Microservice architecture, we don't develop all the functionalities in a single project. We will divide project functionalities into several REST APIs.
+* Microservices architecture based project means collection of REST APIs
+* Microservices is not related to only Java, any programming language specific project can use Microservices Architecture.
+
+#### Advantages
+* Loosely Coupling
+* Easy to maintain
+* Quick Deployment
+* Faster Deployment
+* Faster Releases
+* Less Downtime
+* Technology Independent
+
+#### Dis-advantages
+1. Bounded Context
+2. Lot of configurations
+3. Visibility
+4. Pack of cards
