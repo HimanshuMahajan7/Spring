@@ -438,7 +438,7 @@
 
 ---
 
-## Microservice
+## Microservices
 
 ### What is Monolith Architecture?
 * If we develop all the functionalities in single project, then it is called as Monolith Architecture based application.
@@ -482,3 +482,38 @@
 2. Lot of configurations
 3. Visibility
 4. Pack of cards
+
+### Service Registry
+* Service Registry acts as a DB of services available in the project.
+* It provides the details if all the services which are registered with Service Registry.
+* We can identify how many services available in the project.
+* We can identify how many instances are available for each service.
+* We can use **Eureka Server** as a service registry.
+* Eureka Server provided by **Spring Cloud Netflix** library.
+
+### Services
+* Services mean REST APIs / Microservices.
+* Services contain backend business logic.
+* In the project, some services will interact with DB.
+* In the project, some services will interact with third party REST API (external communication).
+* In the project, some services will interact with other services with in the project (inter service communication).
+* For inter-service communication, we will use feign-client.
+* To distribute the load, we can run one service with multiple instances (Load Balancing).
+* NOTE: We will register every service with Service Registry.
+
+### API Gateway
+* API Gateway is used to manage our backend APIs of the project.
+* API Gateway acts as a mediator between end users and backend APIs.
+* API Gateway can contain filter logic to decide request processing (Authentication).
+* API Gateway will contain Routing Logic (Which request should go to which REST API).
+* API Gateway also will be registered with Service Registry.
+* Spring Cloud Gateway we can use as API Gateway.
+
+### Admin Server
+* Admin Server is used to manage all backend API's actuator endpoints at one place.
+* Our backend APIs will be registered with Admin Server.
+* Admin Server will provide a User interface to monitor APIs actuator endpoints.
+
+### Zipkin Server
+* Zipkin Server is used for Distributed Tracing.
+* Using this Zipkin, we can monitor which API is taking more time to process our request.
