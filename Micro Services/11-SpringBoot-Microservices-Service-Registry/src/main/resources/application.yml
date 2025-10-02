@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: 11-SpringBoot-Microservices-Service-Registry
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: 14-SpringBoot-Microservices-Welcome-API
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
