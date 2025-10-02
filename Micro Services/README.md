@@ -517,3 +517,11 @@
 ### Zipkin Server
 * Zipkin Server is used for Distributed Tracing.
 * Using this Zipkin, we can monitor which API is taking more time to process our request.
+
+### Load Balancer
+* LBR is used to distribute an application load to multiple servers to reduce the burden.
+* NOTE: When we run an application on a single server, then it may not handle a huge load.
+* When many requests are coming, then our server might crash and the app will go down.
+* To avoid these problems, we will use Load Balancer for application execution.
+* NOTE: Instead of running our application in a single server, we will run our application in multiple servers to reduce the burden and handle the load.
+* NOTE: When application is running in multiple servers, then we will call them as Instances.
