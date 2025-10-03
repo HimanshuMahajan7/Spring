@@ -525,3 +525,25 @@
 * To avoid these problems, we will use Load Balancer for application execution.
 * NOTE: Instead of running our application in a single server, we will run our application in multiple servers to reduce the burden and handle the load.
 * NOTE: When application is running in multiple servers, then we will call them as Instances.
+
+### API Gateway
+* API Gateway will act as a mediator between client requests & backend APIs.
+* API Gateway will provide a single entrypoint to access our backend APIs.
+* In API Gateway, we will write mainly below two types of logics:
+    1. Filters
+    2. Routing
+* Filters are used to execute some logic before request processing and after request processing.
+* Routing is used to tell which request should gt to which REST API.
+* In Spring Cloud, we have two options to create API Gateway:
+    1. Zuul Proxy (Old Approach)
+    2. Spring Cloud Gateway (Latest Approach)
+* NOTE: Zuul Proxy is not supported by latest versions of Spring Boot
+
+#### Working with Spring Cloud API Gateway
+* Create Spring Boot application with the below dependencies
+    1. web-starter
+    2. eureka-client
+    3. cloud-gateway
+    4. devtools
+* Configure @EnableDiscoveryClient annotation at boot start class
+* Configure API Gateway Routing in application.yml file like below
